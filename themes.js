@@ -7,6 +7,8 @@ const ALL_MESSAGES = '_s1-';
 const OUR_MESSAGES = '_43by';
 const THEIR_MESSAGES = '_3oh-';
 
+const PANEL_TOP = '_673w';
+
 const OUR_COLOR = 'fuchsia';
 const THEIR_COLOR = 'pink';
 const BACKGROUND_COLOR = '#624b5c';
@@ -35,7 +37,19 @@ window.onload = () => {
 
 function recolor() {
   // Recolor the background
+  let backgroundTop = document.getElementsByClassName(PANEL_TOP)[0];
 
+  // Left panel (overview of messages)
+  body.style.backgroundColor = "#624b5c";
+
+  // Probably the top bar
+  // document.getElementsByClassName('_1enh')[0].style.backgroundColor = "#624b5c";
+  //
+  // // Probably the background of the chat panel
+  // document.getElementsByClassName('_20bp')[0].style.backgroundColor = "#624b5c";
+  //
+  // // The line between the messages overview and the chat panel
+  // document.getElementsByClassName('_4sp8')[0].style.backgroundColor = "#624b5c";
 
   // Recolor the messages
   let allMessages = document.getElementsByClassName(ALL_MESSAGES);
@@ -52,23 +66,4 @@ function recolor() {
     }
     // Else, undefined behavior
   }
-
-
-
-  //
-  // let body = document.getElementsByClassName('_673w')[0];
-  // let bubbles = document.getElementsByClassName('_3058 _ui9 _hh7 _6ybn _s1- _52mr _43by _3oh-');
-  //
-  // // Left panel (overview of messages)
-  // body.style.backgroundColor = "#624b5c";
-  //
-  // // Probably the top bar
-  // document.getElementsByClassName('_1enh')[0].style.backgroundColor = "#624b5c";
-  //
-  // // Probably the background of the chat panel
-  // document.getElementsByClassName('_20bp')[0].style.backgroundColor = "#624b5c";
-  //
-  // // The line between the messages overview and the chat panel
-  // document.getElementsByClassName('_4sp8')[0].style.backgroundColor = "#624b5c";
-
 }
