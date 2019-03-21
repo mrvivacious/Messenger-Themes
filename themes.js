@@ -5,30 +5,38 @@
 // grab the ID's of Messenger's chat bubbles, text, and background
 
 window.onload = () => {
-setInterval(doNothing, 5000);
+  setInterval(recolor, 5000);
 
-let bubbles = document.getElementsByClassName('_3058 _ui9 _hh7 _6ybn _s1- _52mr _43by _3oh-');
+  let body = document.getElementsByClassName('_673w')[0];
+  let bubbles = document.getElementsByClassName('_3058 _ui9 _hh7 _6ybn _s1- _52mr _43by _3oh-');
 
-for (let i = 0; i < bubbles.length; i++) {
-bubbles[i].style.backgroundColor = 'lightgreen'
-}
+  body.style.backgroundColor = "#624b5c";
+  document.getElementsByClassName('_1enh')[0].style.backgroundColor = "#624b5c";
+  document.getElementsByClassName('_20bp')[0].style.backgroundColor = "#624b5c";
+
+  for (let i = 0; i < bubbles.length; i++) {
+    bubbles[i].style.backgroundColor = 'fuchsia'
+  }
 
 
 // step 2
 // modify the color
 
 // step 3
-
 }
 
-function doNothing() {
+function recolor() {
+  let body = document.getElementsByClassName('_673w')[0];
+  let bubbles = document.getElementsByClassName('_3058 _ui9 _hh7 _6ybn _s1- _52mr _43by _3oh-');
+  //alert('num of bubbles = ' + bubbles.length);
+
+  body.style.backgroundColor = "#624b5c";
+  document.getElementsByClassName('_1enh')[0].style.backgroundColor = "#624b5c";
+  document.getElementsByClassName('_20bp')[0].style.backgroundColor = "#624b5c";
 
 
-let bubbles = document.getElementsByClassName('_3058 _ui9 _hh7 _6ybn _s1- _52mr _43by _3oh-');
-//alert('num of bubbles = ' + bubbles.length);
-
-for (let i = 0; i < bubbles.length; i++) {
-bubbles[i].style.backgroundColor = 'lightgreen'
-
-}
+  // color the bubbles
+  for (let i = 0; i < bubbles.length; i++) {
+    bubbles[i].style.backgroundColor = 'fuchsia'
+  }
 }
