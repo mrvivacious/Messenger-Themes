@@ -1,40 +1,88 @@
+<!--
+  Messenger Themes => Customize how Messenger looks ~
+
+  popup.html
+
+  This file is the interface for users to customize and select themes
+
+  @author Linus Zhu
+  @author Vivek Bhookya
+-->
+
+
 <!doctype html>
 <!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
+  This page is shown when the extension button is clicked, because the
+  "browser_action" field in manifest.json contains the "default_popup" key with
+  value "popup.html".
+-->
+
+
+<!--
+  TODO:
+
+  o Working popup page
+    o Hex color chooser
+    o Save to storage.sync (https://developer.chrome.com/extensions/options)
+    o Verify saved states (https://chrome.google.com/webstore/detail/storage-area-explorer/ocfjjjjhkpapocigimmppepjgfdecjkb?hl=en)
+
+  o Specify colors for the background, "my" chat bubbles, "your" chat bubbles
+  o Some default color schemes, like dark, and turn them on with a switch (https://www.w3schools.com/howto/howto_css_switch.asp)
+
+-->
+
 <html>
 
-    <head>
-        <title>My Test Extension Options</title>
+<head>
+  <title>My Test Extension Options</title>
 
-        <style>
-            body {
-                width: 300px;
-            }
-        </style>
-    </head>
+  <style>
+    body {
+      width: 300px;
+    }
+  </style>
 
-    <body>
-        <h1>Themes for Messenger</h1>
+  <!-- Put the script in the header if you want to "pre-load" the script -->
+  <!-- Shout out http://jscolor.com/ big thank you for the color picker -->
+  <!-- Themes for Messenger is NON-Commercial -->
+  <!-- MIT license is compatible with GPL -->
+  <!-- https://www.gnu.org/licenses/gpl-3.0.txt -->
+  <!-- https://www.google.com/search?q=is+mit+license+compatible+with+gpl&oq=is+mit+license+com&aqs=chrome.2.69i57j0l5.3025j0j4&sourceid=chrome&ie=UTF-8 -->
+  <script src="jscolor.js"></script>
+</head>
 
-    Favorite color:
-    <select id="color">
-         <option value="red">red</option>
-          <option value="green">green</option>
-           <option value="blue">blue</option>
-            <option value="yellow">yellow</option>
-    </select>
+  <body>
+    <h1>Themes for Messenger</h1>
 
-    <label>
-          <input type="checkbox" id="like">
-            I like colors.
-    </label>
+    <p>Hex color chooser goes below</p>
 
-    <div id="status"></div>
+    <p>Color: <input class = "jscolor" value = "ab2567"></p>
+
+    <p>Choose your chat bubble color:
+    <button
+      class="jscolor {valueElement:null}"
+      style="width:50px; height:20px;">
+    </button>
+
+    <p>Choose their chat bubble color:
+    <button
+      class="jscolor {valueElement:null}"
+      style="width:50px; height:20px;">
+    </button>
+
+    <p>Choose your background color:
+    <button
+      class="jscolor {valueElement:null}"
+      style="width:50px; height:20px;">
+    </button>
+
+    <br><br>
+
     <button id="save">Save</button>
+  </body>
 
-    <script src="themes.js"></script>
-</body>
+  <!-- Scripts go outside of the body -->
+  <!-- Adding a script at the bottom of an HTML file will activate the script after the
+        above HTML has loaded -->
+  <script src="themes.js"></script>
 </html>
