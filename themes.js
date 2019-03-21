@@ -1,14 +1,27 @@
 // themes.js
 // this fileis responsible for the coloring
 
+// TODO
+// find the small details!!!
+
 // step 1
-// grab the classes of Messenger's chat bubbles, text, and background
+// grab the classes of Messenger's text and misc elements
+// CLASSES
+// Messages
 const ALL_MESSAGES = '_s1-';
 const OUR_MESSAGES = '_43by';
 const THEIR_MESSAGES = '_3oh-';
 
-const PANEL_TOP = '_673w';
+// Background
+const BACKGROUND_PANEL_TOP = '_673w';
+const BACKGROUND_PANEL_LEFT = '_1enh';
+const BACKGROUND_PANEL_CHAT = '_20bp';
+const BACKGROUND_PANEL_DIVIDER = '_4sp8';
 
+// Misc
+const TYPING_INDICATOR = 'clearfix _17pz';
+
+// COLORS
 const OUR_COLOR = 'fuchsia';
 const THEIR_COLOR = 'pink';
 const BACKGROUND_COLOR = '#624b5c';
@@ -31,26 +44,41 @@ const BACKGROUND_COLOR = '#624b5c';
 //  and colors them immediately, avoiding any time delay between
 //  our setInterval and the coloring of the message
 
+// onConversationChange, recolorBackground
+// onMessageSendOrReceive, recolorMessages
+// etc.
+
 window.onload = () => {
   setInterval(recolor, 2000);
 }
 
-function recolor() {
+function recolorBackground() {
   // Recolor the background
-  let backgroundTop = document.getElementsByClassName(PANEL_TOP)[0];
+  let backgroundTop = document.getElementsByClassName(BACKGROUND_PANEL_TOP)[0];
+  let backgroundLeft = document.getElementsByClassName(BACKGROUND_PANEL_LEFT)[0];
+  let backgroundChat = document.getElementsByClassName(BACKGROUND_PANEL_CHAT)[0];
+  let backgroundDivider = document.getElementsByClassName(BACKGROUND_PANEL_DIVIDER)[0];
 
-  // Left panel (overview of messages)
-  body.style.backgroundColor = "#624b5c";
+  // Silence console warnings by only recoloring if the item
+  //  was successfully found
+  if (backgroundTop) {
+    backgroundTop.style.backgroundColor = BACKGROUND_COLOR;
+  }
 
-  // Probably the top bar
-  // document.getElementsByClassName('_1enh')[0].style.backgroundColor = "#624b5c";
-  //
-  // // Probably the background of the chat panel
-  // document.getElementsByClassName('_20bp')[0].style.backgroundColor = "#624b5c";
-  //
-  // // The line between the messages overview and the chat panel
-  // document.getElementsByClassName('_4sp8')[0].style.backgroundColor = "#624b5c";
+  if (backgroundLeft) {
+    backgroundLeft.style.backgroundColor = BACKGROUND_COLOR;
+  }
 
+  if (backgroundChat) {
+    backgroundChat.style.backgroundColor = BACKGROUND_COLOR;
+  }
+
+  if (backgroundDivider) {
+    backgroundDivider.style.backgroundColor = BACKGROUND_COLOR;
+  }
+}
+
+function recolorMessages() {
   // Recolor the messages
   let allMessages = document.getElementsByClassName(ALL_MESSAGES);
 
@@ -64,6 +92,24 @@ function recolor() {
     else if (currentClass === THEIR_MESSAGES) {
       currentMessage.style.backgroundColor = THEIR_COLOR;
     }
-    // Else, undefined behavior
+    // Else, we found something that isn't a chat bubble, so
+    //  let's not worry about it
   }
+}
+
+function recolorMisc() {
+  let typingIndicator = document.getElementsByClassName(TYPING_INDICATOR)[0];
+
+  if (typingIndicator) {
+    typingIndicator.style.backgroundColor = BACKGROUND_COLOR;
+  }
+}
+
+function recolor() {
+  recolorBackground();
+
+  recolorMessages();
+
+  // Recolor misc
+  recolorMisc();
 }
