@@ -1,11 +1,11 @@
 // themes.js
-// this fileis responsible for the coloring 
+// this fileis responsible for the coloring
 
 // step 1
 // grab the ID's of Messenger's chat bubbles, text, and background
 
 window.onload = () => {
-setTimeout(doNothing, 5000);
+setInterval(doNothing, 5000);
 
 let bubbles = document.getElementsByClassName('_3058 _ui9 _hh7 _6ybn _s1- _52mr _43by _3oh-');
 alert('num of bubbles = ' + bubbles.length);
@@ -23,8 +23,13 @@ bubbles[i].style.backgroundColor = 'lightgreen'
 }
 
 function doNothing() {
-// does nothing
-let i = 0;
-while (i < 1999)
-i++;
+
+
+let bubbles = document.getElementsByClassName('_3058 _ui9 _hh7 _6ybn _s1- _52mr _43by _3oh-');
+//alert('num of bubbles = ' + bubbles.length);
+
+for (let i = 0; i < bubbles.length; i++) {
+bubbles[i].style.backgroundColor = 'lightgreen'
+
+}
 }
