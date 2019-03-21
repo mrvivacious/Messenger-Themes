@@ -26,5 +26,10 @@
 
   "permissions": [
     "activeTab"
-  ]
+  ],
+
+  "options_ui": {
+      "page":"popup.html",
+      "open_in_tab":false
+  }
 }
