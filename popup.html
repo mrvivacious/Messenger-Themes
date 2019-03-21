@@ -1,0 +1,101 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+
+<head>
+  <title>theme's Popup</title>
+
+  <style type="text/css">
+    body {
+      margin: 10px;
+      display: block;
+      font-size: 14px;
+      width: 300px;
+      /* font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif; */
+
+      /* white-space: nowrap; */
+      /* background-color: blanchedAlmond; */
+    }
+
+    h1 {
+      font-size: 14px;
+    }
+
+    p {
+    	font-size: 18px;
+    	font-style: normal;
+    	font-variant: normal;
+        margin: 0px;
+        padding: 5px;
+    }
+
+    hr {
+        color: black;
+    }
+
+    #container {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
+
+
+    a:link {
+        color: brown;
+        background-color: transparent;
+        text-decoration: none;
+        outline: none;
+    }
+
+    a:visited {
+        color: brown;
+        background-color: transparent;
+        text-decoration: none;
+        outline: none;
+    }
+
+    a:hover {
+        color: pink;
+        background-color: transparent;
+        outline: none;
+        /*text-decoration: underline;*/
+    }
+
+
+    /* https://www.w3schools.com/howto/howto_css_vertical_menu.asp */
+    .vertical-menu {
+    /* width: 250px; */
+    display: block; /* Make the links appear below each other */
+    }
+
+  </style>
+
+  <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+    -->
+  <script src="themes.js"></script>
+
+</head>
+
+<body>
+  <div id="container">
+
+      <div class="vertical-menu">
+          <h1>Themes for mesgnerserasf</h1>
+
+      </div>
+
+
+  </div>
+</body>
+<script src="MagicalMessages.js"></script>
+
+
+</html>
