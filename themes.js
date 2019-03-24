@@ -3,6 +3,9 @@
 
 // TODO
 // find the small details!!!
+// Messages with reactions somehow become immune to recoloring
+// URL message background needs to be recolored
+// The reactions on messages needs to be recolored
 
 // step 1
 // grab the classes of Messenger's text and misc elements
@@ -27,6 +30,8 @@ const THEIR_COLOR = 'pink';
 const BACKGROUND_COLOR = '#624b5c';
 
 // O(n) for the elements, which is fine
+
+// https://stackoverflow.com/questions/48760542/time-complexity-of-includes-function-in-javascript
 // O(n) for the .includes(), can we do better?
 // + The className.length is somewhat long
 // for element in getElementsByClassName(ALL_MESSAGES)
@@ -43,6 +48,12 @@ const BACKGROUND_COLOR = '#624b5c';
 // ?? Attach some kind of event listener that listens for new messages
 //  and colors them immediately, avoiding any time delay between
 //  our setInterval and the coloring of the message
+
+// Enter key is pressed when sending a message
+// onKeyupEvent => if "Enter" was pressed => Recolor messages
+//
+// Navigating between chats is done via mouseclicks
+// onMouseUpEvent => Recolor background and messages
 
 // onConversationChange, recolorBackground
 // onMessageSendOrReceive, recolorMessages
