@@ -18,7 +18,7 @@ const THEIR_MESSAGES = '_3oh-';
 // Background
 const BACKGROUND_PANEL_TOP = '_673w';
 const BACKGROUND_PANEL_LEFT = '_1enh';
-const BACKGROUND_PANEL_CHAT = '_20bp';
+const BACKGROUND_PANEL_CHAT = '_5irm';
 const BACKGROUND_PANEL_DIVIDER = '_4sp8';
 
 // Misc
