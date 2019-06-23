@@ -6,6 +6,9 @@
 // Messages with reactions somehow become immune to recoloring
 // URL message background needs to be recolored
 // The reactions on messages needs to be recolored
+// We can't recolor the SVG elements via document.getElement... code
+// + What do we do for the SVG? They default to the selected Messenger theme and
+//    do not adopt the custom color scheme from theMes
 
 // step 1
 // grab the classes of Messenger's text and misc elements
@@ -16,6 +19,12 @@ const OUR_MESSAGES = '_43by';
 const THEIR_MESSAGES = '_3oh-';
 
 // Background
+// TOP: Top of the chat window, where the recipient's profile picture and
+//  name sit
+// LEFT: "Chats" panel, where all the conversations sit
+// CHAT: Where the messages in an opened conversation sit
+// DIVIDER: The vertical line between the list of all conversations and
+//  the currently opened conversation
 const BACKGROUND_PANEL_TOP = '_673w';
 const BACKGROUND_PANEL_LEFT = '_1enh';
 const BACKGROUND_PANEL_CHAT = '_5irm';
@@ -23,6 +32,7 @@ const BACKGROUND_PANEL_DIVIDER = '_4sp8';
 
 // Misc
 const TYPING_INDICATOR = 'clearfix _17pz';
+const MESSAGE_STATUS_INDICATOR = '_2her';
 
 // COLORS
 const OUR_COLOR = 'fuchsia';
@@ -110,10 +120,18 @@ function recolorMessages() {
 
 function recolorMisc() {
   let typingIndicator = document.getElementsByClassName(TYPING_INDICATOR)[0];
+  let messageStatusIndicator = document.getElementsByClassName(MESSAGE_STATUS_INDICATOR);
 
   if (typingIndicator) {
     typingIndicator.style.backgroundColor = BACKGROUND_COLOR;
   }
+
+  if (messageStatusIndicator) {
+    for (let msg = 0; messageStatusIndicator[msg]; msg++) {
+      messageStatusIndicator[msg].style.color = OUR_COLOR;
+    }
+  }
+
 }
 
 function recolor() {
