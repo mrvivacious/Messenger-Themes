@@ -118,6 +118,57 @@ function recolorMessages() {
   }
 }
 
+function recolorSVG() {
+  // Make list of SVG
+  // Cycle through the list
+  // Recolor each
+
+  // TODO replace hardcoded string ids with constants
+  //  declared at the top of this file
+  let svgIds = [
+    'Fill-11', // Phone
+    'original', // Video chat button
+    'Fill-17' // I for information
+  ];
+
+  // TODO add if (exists) to avoid errors
+  for (let i = 0; svgIds[i]; i++) {
+    // Get the SVG element corresponding to the current ID value
+    let svgId = svgIds[i];
+    let svg = document.getElementById(svgId);
+
+    // Get the current HTML of this SVG
+    let body = svg.outerHTML;
+    // console.log(body)
+
+    // TODO function to extract the current fill value out of this svg
+    // body = body.replace("#0099ff", "#aabbcc");
+    body = recoloredSVG(body, 'aabbcc');
+
+    // Thank you,
+    // https://stackoverflow.com/questions/1750815/get-the-string-representation-of-a-dom-node
+    svg.outerHTML = body;
+  }
+}
+
+function recoloredSVG(originalHTML, newColor) {
+  // Dynamic find and replace
+  // Find the original <...Fill=...> value and replace the
+  //  hex with our newColor
+  // + 1 to move one character past the #
+  let startOfFill = originalHTML.lastIndexOf('#') + 1;
+  let originalFill = '';
+
+  // Get old fill
+  for (let i = startOfFill; i < startOfFill + 6; i++) {
+    originalFill += originalHTML[i];
+  }
+
+  console.log(originalFill)
+
+  return originalHTML.replace(originalFill, newColor);
+}
+
 function recolorMisc() {
   let typingIndicator = document.getElementsByClassName(TYPING_INDICATOR)[0];
   let messageStatusIndicator = document.getElementsByClassName(MESSAGE_STATUS_INDICATOR);
@@ -138,6 +189,8 @@ function recolor() {
   recolorBackground();
 
   recolorMessages();
+
+  recolorSVG();
 
   // Recolor misc
   recolorMisc();
