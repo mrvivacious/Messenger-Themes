@@ -31,8 +31,12 @@ const BACKGROUND_PANEL_CHAT = '_5irm';
 const BACKGROUND_PANEL_DIVIDER = '_4sp8';
 
 // Misc
+// POPUP_MEDIA_PANEL: When the Messenger window is
+//  minimized to a particular width, the Upload image / Stickers / GIF / etc
+//  menu disappears -- we keep this to recolor the panel when it is toggled open
 const TYPING_INDICATOR = 'clearfix _17pz';
 const MESSAGE_STATUS_INDICATOR = '_2her';
+const POPUP_MEDIA_PANEL = '_7mkk _7t1o _7t0e';
 
 // COLORS
 const OUR_COLOR = '#FF94F0';
@@ -171,16 +175,21 @@ function recoloredSVG(originalHTML, newColor) {
 
 function recolorMisc() {
   let typingIndicator = document.getElementsByClassName(TYPING_INDICATOR)[0];
-  let messageStatusIndicator = document.getElementsByClassName(MESSAGE_STATUS_INDICATOR);
 
   if (typingIndicator) {
     typingIndicator.style.backgroundColor = BACKGROUND_COLOR;
   }
 
+  let messageStatusIndicator = document.getElementsByClassName(MESSAGE_STATUS_INDICATOR);
   if (messageStatusIndicator) {
     for (let msg = 0; messageStatusIndicator[msg]; msg++) {
       messageStatusIndicator[msg].style.color = OUR_COLOR;
     }
+  }
+
+  let popupMediaPanel = document.getElementsByClassName(POPUP_MEDIA_PANEL)[0];
+  if (popupMediaPanel) {
+    popupMediaPanel.style.backgroundColor = BACKGROUND_COLOR;
   }
 
 }
