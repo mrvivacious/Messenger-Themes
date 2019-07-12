@@ -35,8 +35,8 @@ const TYPING_INDICATOR = 'clearfix _17pz';
 const MESSAGE_STATUS_INDICATOR = '_2her';
 
 // COLORS
-const OUR_COLOR = 'fuchsia';
-const THEIR_COLOR = 'pink';
+const OUR_COLOR = '#FF94F0';
+const THEIR_COLOR = '#FFCEE3';
 const BACKGROUND_COLOR = '#624b5c';
 
 // O(n) for the elements, which is fine
@@ -143,7 +143,7 @@ function recolorSVG() {
 
     // TODO function to extract the current fill value out of this svg
     // body = body.replace("#0099ff", "#aabbcc");
-    body = recoloredSVG(body, 'aabbcc');
+    body = recoloredSVG(body, OUR_COLOR);
 
     // Thank you,
     // https://stackoverflow.com/questions/1750815/get-the-string-representation-of-a-dom-node
@@ -156,11 +156,11 @@ function recoloredSVG(originalHTML, newColor) {
   // Find the original <...Fill=...> value and replace the
   //  hex with our newColor
   // + 1 to move one character past the #
-  let startOfFill = originalHTML.lastIndexOf('#') + 1;
+  let startOfFill = originalHTML.lastIndexOf('#');
   let originalFill = '';
 
   // Get old fill
-  for (let i = startOfFill; i < startOfFill + 6; i++) {
+  for (let i = startOfFill; i < startOfFill + 7; i++) {
     originalFill += originalHTML[i];
   }
 
