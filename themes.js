@@ -6,9 +6,6 @@
 // Messages with reactions somehow become immune to recoloring
 // URL message background needs to be recolored
 // The reactions on messages needs to be recolored
-// We can't recolor the SVG elements via document.getElement... code
-// + What do we do for the SVG? They default to the selected Messenger theme and
-//    do not adopt the custom color scheme from theMes
 
 // step 1
 // grab the classes of Messenger's text and misc elements
@@ -129,12 +126,15 @@ function recolorSVG() {
 
   // TODO replace hardcoded string ids with constants
   //  declared at the top of this file
+  // TODO switch to classname of div and get children elements
+  //  cuz not every svg has a unique id for whatever reason ????
   let svgIds = [
     'Fill-11', // Phone
     'original', // Video chat button
-    'Fill-17' // I for information
+    'Fill-17' // I for information button top right
   ];
 
+  // IDs
   // TODO add if (exists) to avoid errors
   for (let i = 0; svgIds[i]; i++) {
     // Get the SVG element corresponding to the current ID value
@@ -147,15 +147,24 @@ function recolorSVG() {
 
     // TODO function to extract the current fill value out of this svg
     // body = body.replace("#0099ff", "#aabbcc");
-    body = recoloredSVG(body, OUR_COLOR);
+    body = recoloredSVG(body);
 
     // Thank you,
     // https://stackoverflow.com/questions/1750815/get-the-string-representation-of-a-dom-node
     svg.outerHTML = body;
   }
+
+  // ClassNames hardcode TODO
+  let svgClassNames = [
+    '_5j_u _30yy _4rv9 _6ymq _7kpj' // Bottom right emoji react button
+  ]
+
+  let thumb = document.getElementsByClassName(svgClassNames[0])[0];
+  thumb = thumb.children[0];
+  thumb.outerHTML = recoloredSVG(thumb.outerHTML);
 }
 
-function recoloredSVG(originalHTML, newColor) {
+function recoloredSVG(originalHTML) {
   // Dynamic find and replace
   // Find the original <...Fill=...> value and replace the
   //  hex with our newColor
@@ -170,7 +179,7 @@ function recoloredSVG(originalHTML, newColor) {
 
   console.log(originalFill)
 
-  return originalHTML.replace(originalFill, newColor);
+  return originalHTML.replace(originalFill, OUR_COLOR);
 }
 
 function recolorMisc() {
@@ -191,7 +200,6 @@ function recolorMisc() {
   if (popupMediaPanel) {
     popupMediaPanel.style.backgroundColor = BACKGROUND_COLOR;
   }
-
 }
 
 function recolor() {
@@ -201,6 +209,5 @@ function recolor() {
 
   recolorSVG();
 
-  // Recolor misc
   recolorMisc();
 }
