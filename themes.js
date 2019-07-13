@@ -6,6 +6,7 @@
 // Messages with reactions somehow become immune to recoloring
 // URL message background needs to be recolored
 // The reactions on messages needs to be recolored
+// When the information icon is open, recolor that stuff too
 
 // step 1
 // grab the classes of Messenger's text and misc elements
