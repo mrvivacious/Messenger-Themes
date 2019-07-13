@@ -124,6 +124,8 @@ function recolorSVG() {
   // Cycle through the list
   // Recolor each
 
+  // We need a better way of searching for the SVG elements ?
+  // Nothing wrong with hardcoding though
   // TODO replace hardcoded string ids with constants
   //  declared at the top of this file
   // TODO switch to classname of div and get children elements
@@ -156,12 +158,83 @@ function recolorSVG() {
 
   // ClassNames hardcode TODO
   let svgClassNames = [
-    '_5j_u _30yy _4rv9 _6ymq _7kpj' // Bottom right emoji react button
+    '_30yy _38lh _7kpi', // Bottom right, paper airplane when typing
+    '_30yy _7odb', // Smile face inside message input
+    '_7mki' // Bottom left plus icon
   ]
 
-  let thumb = document.getElementsByClassName(svgClassNames[0])[0];
-  thumb = thumb.children[0];
-  thumb.outerHTML = recoloredSVG(thumb.outerHTML);
+  let paperAirplane = document.getElementsByClassName(svgClassNames[0])[0];
+  if (paperAirplane) {
+    paperAirplane = paperAirplane.children[0];
+    paperAirplane.outerHTML = recoloredSVG(paperAirplane.outerHTML);
+  }
+
+  let smileFace = document.getElementsByClassName(svgClassNames[1])[0];
+  if (smileFace) {
+    smileFace = smileFace.children[0];
+    smileFace.outerHTML = recoloredSVG(smileFace.outerHTML);
+  }
+
+  ////
+
+  // Iterate over the SVGs on the bottom panel
+  let bottomSVGS = document.getElementsByClassName('_7oal');
+  for (let svg = 0; bottomSVGS[svg]; svg++) {
+    // Get the current SVG
+    let currentSVG = bottomSVGS[svg];
+
+    // Use the appropriate search:
+    // Thank you,
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+    switch (svg) {
+      // Ignore, for these SVGs aren't icons / aren't visible
+      case 0:
+      case 6:
+        break;
+
+      // rgba handling
+      // The plus icon on the bottom left [that toggles the other buttons]
+      case 1:
+        currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+        break;
+
+      // 1 level
+      // The like button / emoji reaction icon on the bottom right
+      case 10:
+        currentSVG = currentSVG.children[0];
+        currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+        break;
+
+      // 2 levels
+      // GIF selector | Sticker selector icon
+      case 7:
+      case 8:
+        currentSVG = currentSVG.children[0].children[1];
+        currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+        break;
+
+      // 3 levels
+      // Camera | Gamepad | Microphone | File upload icon
+      case 2:
+      case 3:
+      case 5:
+      case 9:
+        currentSVG = currentSVG.children[0].children[0].children[1];
+        currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+        break;
+
+      // Special double-child SVG case lmao
+      // Currency icon
+      case 4:
+        currentSVG = currentSVG.children[0].children[0];
+        currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
+        currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
+        break;
+
+      default:
+        console.log('TheMes::DEBUG: The size of the SVG bottom panel list has increased?')
+    }
+  }
 }
 
 function recoloredSVG(originalHTML) {
@@ -170,6 +243,11 @@ function recoloredSVG(originalHTML) {
   //  hex with our newColor
   // + 1 to move one character past the #
   let startOfFill = originalHTML.lastIndexOf('#');
+  if (startOfFill < 0) {
+    console.log('hidden')
+    return;
+  }
+
   let originalFill = '';
 
   // Get old fill
@@ -177,7 +255,7 @@ function recoloredSVG(originalHTML) {
     originalFill += originalHTML[i];
   }
 
-  console.log(originalFill)
+  // console.log(originalFill)
 
   return originalHTML.replace(originalFill, OUR_COLOR);
 }
