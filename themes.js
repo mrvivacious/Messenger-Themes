@@ -128,8 +128,6 @@ function recolorSVG() {
   // Nothing wrong with hardcoding though
   // TODO replace hardcoded string ids with constants
   //  declared at the top of this file
-  // TODO switch to classname of div and get children elements
-  //  cuz not every svg has a unique id for whatever reason ????
   let svgIds = [
     'Fill-11', // Phone
     'original', // Video chat button
@@ -155,12 +153,14 @@ function recolorSVG() {
     // https://stackoverflow.com/questions/1750815/get-the-string-representation-of-a-dom-node
     svg.outerHTML = body;
   }
+}
 
+function recolorBottomSVG() {
+  // BOTTOM PANEL SVGs
   // ClassNames hardcode TODO
   let svgClassNames = [
     '_30yy _38lh _7kpi', // Bottom right, paper airplane when typing
-    '_30yy _7odb', // Smile face inside message input
-    '_7mki' // Bottom left plus icon
+    '_30yy _7odb' // Smile face inside message input
   ]
 
   let paperAirplane = document.getElementsByClassName(svgClassNames[0])[0];
@@ -174,8 +174,6 @@ function recolorSVG() {
     smileyFace = smileyFace.children[0];
     smileyFace.outerHTML = recoloredSVG(smileyFace.outerHTML);
   }
-
-  ////
 
   // Iterate over the SVGs on the bottom panel
   let bottomSVGS = document.getElementsByClassName('_7oal');
@@ -205,8 +203,7 @@ function recolorSVG() {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
     switch (svg) {
       // Ignore, for these SVGs aren't icons / aren't visible
-      case 0:
-      case 6:
+      case 0: case 6:
         break;
 
       // rgba handling
@@ -224,18 +221,14 @@ function recolorSVG() {
 
       // 2 levels
       // GIF selector | Sticker selector icon
-      case 7:
-      case 8:
+      case 7: case 8:
         currentSVG = currentSVG.children[0].children[1];
         currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
         break;
 
       // 3 levels
       // Camera | Gamepad | Microphone | File upload icon
-      case 2:
-      case 3:
-      case 5:
-      case 9:
+      case 2: case 3: case 5: case 9:
         currentSVG = currentSVG.children[0].children[0].children[1];
         currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
         break;
@@ -252,14 +245,12 @@ function recolorSVG() {
         console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
     }
   }
-
 }
 
 function recoloredSVG(originalHTML) {
   // Dynamic find and replace
   // Find the original <...Fill=...> value and replace the
   //  hex with our newColor
-  // + 1 to move one character past the #
   let startOfFill = originalHTML.lastIndexOf('#');
   if (startOfFill < 0) {
     console.log('hidden')
@@ -304,6 +295,7 @@ function recolor() {
   recolorMessages();
 
   recolorSVG();
+  recolorBottomSVG();
 
   recolorMisc();
 }
