@@ -109,6 +109,9 @@ function recolorMessages() {
     let currentClass = currentMessage.classList[6];
 
     if (currentClass === OUR_MESSAGES) {
+      // Dynamic themes have a background-image attribute,
+      //  OUR_COLOR won't show until this attribute is removed
+      currentMessage.style.backgroundImage = '';
       currentMessage.style.backgroundColor = OUR_COLOR;
     }
     else if (currentClass === THEIR_MESSAGES) {
@@ -156,6 +159,8 @@ function recolorSVG() {
 }
 
 function recolorBottomSVG() {
+  // TODO IF THE PLUS BUTTON OPENS A PANEL ABOVE IT INSTEAD OF
+  //  SHOWING THE ICONS TO THE RIGHT OF IT, THIS CODE BREAKS
   // BOTTOM PANEL SVGs
   // ClassNames hardcode TODO
   let svgClassNames = [
