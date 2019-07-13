@@ -20,7 +20,7 @@
     {
       "matches": ["https://*.facebook.com/*", "https://*.messenger.com/*"],
       "js": ["themes.js", "jscolor.js"],
-      "run_at": "document_end"
+      "run_at": "document_start"
     }
   ],
 

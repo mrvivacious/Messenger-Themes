@@ -70,9 +70,9 @@ const BACKGROUND_COLOR = '#624b5c';
 // onMessageSendOrReceive, recolorMessages
 // etc.
 
-window.onload = () => {
+// window.onload = () => {
   setInterval(recolor, 2000);
-}
+// }
 
 function recolorBackground() {
   // Recolor the background
