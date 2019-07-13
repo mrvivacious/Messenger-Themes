@@ -169,19 +169,36 @@ function recolorSVG() {
     paperAirplane.outerHTML = recoloredSVG(paperAirplane.outerHTML);
   }
 
-  let smileFace = document.getElementsByClassName(svgClassNames[1])[0];
-  if (smileFace) {
-    smileFace = smileFace.children[0];
-    smileFace.outerHTML = recoloredSVG(smileFace.outerHTML);
+  let smileyFace = document.getElementsByClassName(svgClassNames[1])[0];
+  if (smileyFace) {
+    smileyFace = smileyFace.children[0];
+    smileyFace.outerHTML = recoloredSVG(smileyFace.outerHTML);
   }
 
   ////
 
   // Iterate over the SVGs on the bottom panel
   let bottomSVGS = document.getElementsByClassName('_7oal');
-  for (let svg = 0; bottomSVGS[svg]; svg++) {
+
+  for (let svg = 1; bottomSVGS[svg]; svg++) {
     // Get the current SVG
     let currentSVG = bottomSVGS[svg];
+
+    // If the user has a dynamic theme already selected,
+    //  the SVG list has a different length and the items
+    //  are numbered one less than those from the list of a static theme
+    if (bottomSVGS.length === 9) {
+      // Due to the -1 indexing, the file upload icon will be skipped over rip
+      // If we aren't at the file icon, proceed as normal, else jump down
+      if (svg === 8) {
+        // Color the file icon
+        currentSVG = currentSVG.children[0].children[0].children[1];
+        currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+      }
+
+      // Update with respect to the different list indexing
+      currentSVG = bottomSVGS[svg - 1];
+    }
 
     // Use the appropriate search:
     // Thank you,
@@ -232,9 +249,10 @@ function recolorSVG() {
         break;
 
       default:
-        console.log('TheMes::DEBUG: The size of the SVG bottom panel list has increased?')
+        console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
     }
   }
+
 }
 
 function recoloredSVG(originalHTML) {
