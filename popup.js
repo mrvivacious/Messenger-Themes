@@ -4,6 +4,7 @@
 //  such as previewing, saving, selecting, and editing custom TheMes
 //
 // @author Vivek Bhookya
+// @author Linus Zhu
 
 let inputs = document.getElementsByTagName('input');
 let ourColor = '#' + inputs[0].value;
@@ -32,4 +33,16 @@ function show(event) {
       chrome.tabs.sendMessage(tabs[0].id, {ourColor, theirColor, backgroundColor});
     }
   )
+}
+
+// Store the user selected values into localStorage
+function store() {
+  var inputOurColor = '#' + inputs[0];
+  var inputTheirColor = '#' + inputs[1];
+  var inputBackgroundColor = '#' + inputs[2];
+
+  localStorage.setItem(inpurOurColor, ourColor);
+  localStorage.setItem(inputTheirColor, theirColor);
+  localStorage.setItem(inputBackgroundColor, backgroundColor);
+
 }
