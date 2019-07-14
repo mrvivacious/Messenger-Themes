@@ -37,9 +37,9 @@ const MESSAGE_STATUS_INDICATOR = '_2her';
 const POPUP_MEDIA_PANEL = '_7mkk _7t1o _7t0e';
 
 // COLORS
-const OUR_COLOR = '#FF94F0';
-const THEIR_COLOR = '#FFCEE3';
-const BACKGROUND_COLOR = '#624b5c';
+let OUR_COLOR = '#FF94F0';
+let THEIR_COLOR = '#FFCEE3';
+let BACKGROUND_COLOR = '#624b5c';
 
 // O(n) for the elements, which is fine
 
@@ -72,8 +72,13 @@ const BACKGROUND_COLOR = '#624b5c';
 // etc.
 
 // window.onload = () => {
+  chrome.runtime.onMessage.addListener(acceptExtensionMessage);
   setInterval(recolor, 2000);
 // }
+
+function acceptExtensionMessage(request, sender, sendResponse) {
+  recolor(request.ourColor, request.theirColor, request.backgroundColor);
+}
 
 function recolorBackground() {
   // Recolor the background
@@ -446,7 +451,14 @@ function recolorMisc() {
   }
 }
 
-function recolor() {
+function recolor(ourColor, theirColor, backgroundColor) {
+  if (ourColor && theirColor && backgroundColor) {
+    OUR_COLOR = ourColor;
+    THEIR_COLOR = theirColor;
+    BACKGROUND_COLOR = backgroundColor;
+    // alert(`${ourColor}, ${theirColor}, ${backgroundColor}`);
+  }
+
   recolorBackground();
 
   recolorMessages();
