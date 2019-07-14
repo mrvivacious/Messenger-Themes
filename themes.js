@@ -464,6 +464,8 @@ function recolor(ourColor, theirColor, backgroundColor) {
   recolorMessages();
 
   recolorSVG();
+
+  // TODO bug, this f'n breaks in group chats :O ??
   recolorBottomSVG();
 
   recolorMisc();

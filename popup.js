@@ -1,3 +1,10 @@
+// popup.js
+//
+// This file adds functionality to the popup,
+//  such as previewing, saving, selecting, and editing custom TheMes
+//
+// @author Vivek Bhookya
+
 let inputs = document.getElementsByTagName('input');
 let ourColor = '#' + inputs[0].value;
 let theirColor = '#' + inputs[1].value;
