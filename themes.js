@@ -146,18 +146,19 @@ function recolorSVG() {
   ];
 
   // IDs
-  // TODO add if (exists) to avoid errors
   for (let i = 0; svgIds[i]; i++) {
     // Get the SVG element corresponding to the current ID value
     let svgId = svgIds[i];
     let svg = document.getElementById(svgId);
 
+    // SVG doesn't exist? Move to next ID
+    if (!svg) {
+      continue;
+    }
+
     // Get the current HTML of this SVG
     let body = svg.outerHTML;
-    // console.log(body)
 
-    // TODO function to extract the current fill value out of this svg
-    // body = body.replace("#0099ff", "#aabbcc");
     body = recoloredSVG(body);
 
     // Thank you,
@@ -404,11 +405,12 @@ function recolorBottomSVG() {
 
   // Group chats offer a poll SVG
   // If the SVG count on the bottom panel is 13 (default group chat),
+  //  OR if a message is being typed therefore the SVG count is 12,
   //  OR (if the SVG count is 11 AND the last child is an emoji instead of the
   //  thumb reaction)
   let reactionIsImgAndNotThumb =
     iconContainer.children[iconContainer.childElementCount - 1].children[0].src
-  if (bottomSVGS.length === 13 ||
+  if (bottomSVGS.length === 13 || bottomSVGS.length === 12 ||
       (bottomSVGS.length === 11 && reactionIsImgAndNotThumb)) {
     console.log('group chat !?');
     recolorBottomSVGGroupChat();
@@ -694,10 +696,10 @@ function recolor(ourColor, theirColor, backgroundColor) {
 
   recolorMessages();
 
+  recolorMisc();
+
   recolorSVG();
 
-  // TODO bug, this f'n breaks in group chats :O ??
   recolorBottomSVG();
 
-  recolorMisc();
 }
