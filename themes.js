@@ -78,9 +78,24 @@ let THEIR_TEXT_COLOR = '#000000';
 // etc.
 
 // window.onload = () => {
+  getColorsFromStorage();
   chrome.runtime.onMessage.addListener(acceptExtensionMessage);
   setInterval(recolor, 300);
 // }
+
+function getColorsFromStorage() {
+  chrome.storage.sync.get('colors', function(colorsList) {
+    let theMe = colorsList.colors[0];
+
+    OUR_COLOR = theMe[0];
+    THEIR_COLOR = theMe[1];
+    BACKGROUND_COLOR = theMe[2];
+    OUR_TEXT_COLOR = theMe[3];
+    THEIR_TEXT_COLOR = theMe[4];
+
+    recolor();
+  });
+}
 
 function acceptExtensionMessage(request, sender, sendResponse) {
   recolor(

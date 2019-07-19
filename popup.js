@@ -15,6 +15,8 @@ let backgroundColor = '#' + inputs[2].value;
 let ourTextColor = '#' + inputs[3].value;
 let theirTextColor = '#' + inputs[4].value;
 
+let button_save = document.getElementById('save');
+button_save.addEventListener('click', store);
 
 // ??? https://www.w3schools.com/jsref/event_onchange.asp
 for (let input = 0; input < inputs.length; input++) {
@@ -52,12 +54,36 @@ function show(event) {
 
 // Store the user selected values into localStorage
 function store() {
-  var inputOurColor = '#' + inputs[0];
-  var inputTheirColor = '#' + inputs[1];
-  var inputBackgroundColor = '#' + inputs[2];
+  // var inputOurColor = '#' + inputs[0];
+  // var inputTheirColor = '#' + inputs[1];
+  // var inputBackgroundColor = '#' + inputs[2];
+  //
+  // let inputOurTextColor = '#' + inputs[3];
+  // let inputTheirTextColor = '#' + inputs[4];
 
-  localStorage.setItem(inpurOurColor, ourColor);
-  localStorage.setItem(inputTheirColor, theirColor);
-  localStorage.setItem(inputBackgroundColor, backgroundColor);
+  // DANGER
+  // Setting the KEY to a dynamic value (the colors are generated in the lines
+  //  right above) will make looking for them DIFFICULT because you need to search
+  //  by the COLOR instead of like "SAVED_OUR_COLOR"
+  // Use STRINGS for KEYS, dynamic values for VALUES
+  // localStorage.setItem(inpurOurColor, ourColor);
+  // localStorage.setItem(inputTheirColor, theirColor);
+  // localStorage.setItem(inputBackgroundColor, backgroundColor);
+  // localStorage.setItem(inputOurTextColor, inputOur);
+  // localStorage.setItem(inputTheirTextColor, backgroundColor);
 
+  let colors = [
+    ourColor,
+    theirColor,
+    backgroundColor,
+    ourTextColor,
+    theirTextColor
+  ];
+
+  // Save to storage.sync
+  // Thank you,
+  // https://github.com/mrvivacious/ahegao/blob/master/popupFunctions.js#L45
+  chrome.storage.sync.set({colors:[colors]}, function() {
+    // Any code to run after saving
+  });
 }
