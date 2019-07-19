@@ -1,5 +1,8 @@
 // themes.js
-// this fileis responsible for the coloring
+//
+// This file is responsible for the coloring of Messenger
+//
+// @Author Vivek Bhookya (mrvivacious)
 
 // TODO
 // find the small details!!!

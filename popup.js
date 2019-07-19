@@ -3,8 +3,30 @@
 // This file adds functionality to the popup,
 //  such as previewing, saving, selecting, and editing custom TheMes
 //
-// @author Vivek Bhookya
-// @author Linus Zhu
+// @author Vivek Bhookya (mrvivacious)
+// @author Linus Zhu (linuszhu1031)
+
+fetchColors();
+
+function fetchColors() {
+  chrome.storage.sync.get('colors', function(colorsList) {
+    let theMe = colorsList.colors[0];
+
+    let inputIDs = [
+      'ourColor',
+      'theirColor',
+      'backgroundColor',
+      'ourTextColor',
+      'theirTextColor'
+    ];
+
+    for (let id = 0; inputIDs[id]; id++) {
+      document.getElementById(inputIDs[id]).value = theMe[id];
+      document.getElementById(inputIDs[id]).style.backgroundColor = theMe[id];
+    }
+
+  });
+}
 
 let inputs = document.getElementsByTagName('input');
 let ourColor = '#' + inputs[0].value;
