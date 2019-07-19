@@ -35,6 +35,8 @@ const BACKGROUND_PANEL_DIVIDER = '_4sp8';
 const TYPING_INDICATOR = 'clearfix _17pz';
 const MESSAGE_STATUS_INDICATOR = '_2her';
 const POPUP_MEDIA_PANEL = '_7mkk _7t1o _7t0e';
+const PAPER_AIRPLANE = '_30yy _38lh _7kpi';
+const SMILEY_FACE = '_30yy _7odb';
 
 // COLORS
 let OUR_COLOR = '#FF94F0';
@@ -73,7 +75,7 @@ let BACKGROUND_COLOR = '#624b5c';
 
 // window.onload = () => {
   chrome.runtime.onMessage.addListener(acceptExtensionMessage);
-  setInterval(recolor, 2000);
+  setInterval(recolor, 1000);
 // }
 
 function acceptExtensionMessage(request, sender, sendResponse) {
@@ -171,13 +173,25 @@ function recolorBottomSVG() {
 
   // Iterate over the SVGs on the bottom panel
   let iconContainer = document.getElementsByClassName('_5irm _7mkm')[0];
+  let bottomSVGS = document.getElementsByClassName('_7oal');
+
+  // Group chats offer a poll SVG
+  // If the SVG count on the bottom panel is 13 (default group chat),
+  //  OR (if the SVG count is 11 AND the last child is an emoji instead of the
+  //  thumb reaction)
+  let reactionIsImgAndNotThumb =
+    iconContainer.children[iconContainer.childElementCount - 1].children[0].src
+  if (bottomSVGS.length === 13 ||
+      (bottomSVGS.length === 11 && reactionIsImgAndNotThumb)) {
+    console.log('group chat !?');
+    // recolorBottomSVGGroupChat();
+    return;
+  }
 
   // The window is wide enough to show all the SVG icons to the right of the
   //  plus icon so the popup doesn't exist
   // Note the different icon case numbering in each conditional block
   if (iconContainer.childElementCount === 5) {
-    let bottomSVGS = document.getElementsByClassName('_7oal');
-
     for (let svg = 1; bottomSVGS[svg]; svg++) {
       // Get the current SVG
       let currentSVG = bottomSVGS[svg];
@@ -248,8 +262,6 @@ function recolorBottomSVG() {
   }
   // Else if, the window must display half of the SVG icons in a popup above the chat input
   else if (iconContainer.childElementCount === 4) {
-    let bottomSVGS = document.getElementsByClassName('_7oal');
-
     for (let svg = 1; bottomSVGS[svg]; svg++) {
       // Get the current SVG
       let currentSVG = bottomSVGS[svg];
@@ -320,8 +332,6 @@ function recolorBottomSVG() {
   }
   // Else, the window must display all of the SVG icons in a popup above the chat input
   else {
-    let bottomSVGS = document.getElementsByClassName('_7oal');
-
     for (let svg = 1; bottomSVGS[svg]; svg++) {
       // Get the current SVG
       let currentSVG = bottomSVGS[svg];
@@ -415,39 +425,33 @@ function recoloredSVG(originalHTML) {
 
 function recolorMisc() {
   let typingIndicator = document.getElementsByClassName(TYPING_INDICATOR)[0];
+  let messageStatusIndicator = document.getElementsByClassName(MESSAGE_STATUS_INDICATOR);
+  let popupMediaPanel = document.getElementsByClassName(POPUP_MEDIA_PANEL)[0];
+  let paperAirplaneWhileTypingMessage = document.getElementsByClassName(PAPER_AIRPLANE)[0];
+  let smileyFaceInsideChatInput = document.getElementsByClassName(SMILEY_FACE)[0];
 
   if (typingIndicator) {
     typingIndicator.style.backgroundColor = BACKGROUND_COLOR;
   }
 
-  let messageStatusIndicator = document.getElementsByClassName(MESSAGE_STATUS_INDICATOR);
   if (messageStatusIndicator) {
     for (let msg = 0; messageStatusIndicator[msg]; msg++) {
       messageStatusIndicator[msg].style.color = OUR_COLOR;
     }
   }
 
-  let popupMediaPanel = document.getElementsByClassName(POPUP_MEDIA_PANEL)[0];
   if (popupMediaPanel) {
     popupMediaPanel.style.backgroundColor = BACKGROUND_COLOR;
   }
 
-  // ClassNames hardcode TODO
-  let svgClassNames = [
-    '_30yy _38lh _7kpi', // Bottom right, paper airplane when typing
-    '_30yy _7odb' // Smile face inside message input
-  ]
-
-  let paperAirplane = document.getElementsByClassName(svgClassNames[0])[0];
-  if (paperAirplane) {
-    paperAirplane = paperAirplane.children[0];
-    paperAirplane.outerHTML = recoloredSVG(paperAirplane.outerHTML);
+  if (paperAirplaneWhileTypingMessage) {
+    paperAirplaneWhileTypingMessage = paperAirplaneWhileTypingMessage.children[0];
+    paperAirplaneWhileTypingMessage.outerHTML = recoloredSVG(paperAirplaneWhileTypingMessage.outerHTML);
   }
 
-  let smileyFace = document.getElementsByClassName(svgClassNames[1])[0];
-  if (smileyFace) {
-    smileyFace = smileyFace.children[0];
-    smileyFace.outerHTML = recoloredSVG(smileyFace.outerHTML);
+  if (smileyFaceInsideChatInput) {
+    smileyFaceInsideChatInput = smileyFaceInsideChatInput.children[0];
+    smileyFaceInsideChatInput.outerHTML = recoloredSVG(smileyFaceInsideChatInput.outerHTML);
   }
 }
 
