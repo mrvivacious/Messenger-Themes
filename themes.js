@@ -166,6 +166,233 @@ function recolorSVG() {
   }
 }
 
+function recolorBottomSVGGroupChat() {
+  // Iterate over the SVGs on the bottom panel
+  let iconContainer = document.getElementsByClassName('_5irm _7mkm')[0];
+  let bottomSVGS = document.getElementsByClassName('_7oal');
+
+  // The window is wide enough to show all the SVG icons to the right of the
+  //  plus icon so the popup doesn't exist
+  // Note the different icon case numbering in each conditional block
+  if (iconContainer.childElementCount === 5) {
+    for (let svg = 2; bottomSVGS[svg]; svg++) {
+      // Get the current SVG
+      let currentSVG = bottomSVGS[svg];
+
+      if (bottomSVGS.length === 11) {
+        // Due to the -1 indexing, the file upload icon will be skipped over rip
+        // If we aren't at the file icon, proceed as normal, else jump down
+        if (svg === 10) {
+          // Color the file icon
+          currentSVG = currentSVG.children[0].children[0].children[1];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+        }
+
+        // Update with respect to the different list indexing
+        currentSVG = bottomSVGS[svg - 1];
+      }
+
+      // Use the appropriate search:
+      // Thank you,
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+      switch (svg) {
+        // Ignore, for these SVGs aren't icons / aren't visible
+        case 0: case 1: case 8:
+          break;
+
+        // rgba handling
+        // The plus icon on the bottom left [that toggles the other buttons]
+        case 2:
+          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+          break;
+
+        // 1 level
+        // The like button / emoji reaction icon on the bottom right
+        case 12:
+          currentSVG = currentSVG.children[0];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // The poll
+        case 3:
+          currentSVG = currentSVG.children[0].children[0];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // 2 levels
+        // GIF selector | Sticker selector icon
+        case 9: case 10:
+          currentSVG = currentSVG.children[0].children[1];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // 3 levels
+        // Camera | Gamepad | Microphone | File upload icon
+        case 4: case 5: case 7: case 11:
+          currentSVG = currentSVG.children[0].children[0].children[1];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // Special double-child SVG case lmao
+        // Currency icon
+        case 6:
+          currentSVG = currentSVG.children[0].children[0];
+          currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
+          currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
+          break;
+
+        default:
+          console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
+      }
+    }
+  }
+  // Else if, the window must display half of the SVG icons in a popup above the chat input
+  else if (iconContainer.childElementCount === 4) {
+    for (let svg = 1; bottomSVGS[svg]; svg++) {
+      // Get the current SVG
+      let currentSVG = bottomSVGS[svg];
+
+      if (bottomSVGS.length === 11) {
+        // Due to the -1 indexing, the file upload icon will be skipped over rip
+        // If we aren't at the file icon, proceed as normal, else jump down
+        if (svg === 10) {
+          // Color the file icon
+          currentSVG = currentSVG.children[0].children[0].children[1];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+        }
+
+        // Update with respect to the different list indexing
+        currentSVG = bottomSVGS[svg - 1];
+      }
+
+      // Use the appropriate search:
+      // Thank you,
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+      switch (svg) {
+        // Ignore, for these SVGs aren't icons / aren't visible
+        case 0: case 1: case 8:
+          break;
+
+        // rgba handling
+        // The plus icon on the bottom left [that toggles the other buttons]
+        case 7:
+          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+          break;
+
+        // 1 level
+        // The like button / emoji reaction icon on the bottom right
+        case 12:
+          currentSVG = currentSVG.children[0];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // The poll
+        case 6:
+          currentSVG = currentSVG.children[0].children[0];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // 2 levels
+        // GIF selector | Sticker selector icon
+        case 9: case 10:
+          currentSVG = currentSVG.children[0].children[1];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // 3 levels
+        // Camera | Gamepad | Microphone | File upload icon
+        case 5: case 4: case 2: case 11:
+          currentSVG = currentSVG.children[0].children[0].children[1];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // Special double-child SVG case lmao
+        // Currency icon
+        case 3:
+          currentSVG = currentSVG.children[0].children[0];
+          currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
+          currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
+          break;
+
+        default:
+          console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
+      }
+    }
+  }
+  // Else, the window must display all of the SVG icons in a popup above the chat input
+  else {
+    for (let svg = 1; bottomSVGS[svg]; svg++) {
+      // Get the current SVG
+      let currentSVG = bottomSVGS[svg];
+
+      if (bottomSVGS.length === 11) {
+        // Due to the -1 indexing, the file upload icon will be skipped over rip
+        // If we aren't at the file icon, proceed as normal, else jump down
+        if (svg === 10) {
+          // Color the plus icon
+          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+        }
+
+        // Update with respect to the different list indexing
+        currentSVG = bottomSVGS[svg - 1];
+      }
+
+      // Use the appropriate search:
+      // Thank you,
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+      switch (svg) {
+        // Ignore, for these SVGs aren't icons / aren't visible
+        case 0: case 1: case 4:
+          break;
+
+        // rgba handling
+        // The plus icon on the bottom left [that toggles the other buttons]
+        case 11:
+          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+          break;
+
+        // 1 level
+        // The like button / emoji reaction icon on the bottom right
+        case 12:
+          currentSVG = currentSVG.children[0];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // The poll
+        case 10:
+          currentSVG = currentSVG.children[0].children[0];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // 2 levels
+        // GIF selector | Sticker selector icon
+        case 5: case 3:
+          currentSVG = currentSVG.children[0].children[1];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // 3 levels
+        // Camera | Gamepad | Microphone | File upload icon
+        case 9: case 8: case 6: case 2:
+          currentSVG = currentSVG.children[0].children[0].children[1];
+          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          break;
+
+        // Special double-child SVG case lmao
+        // Currency icon
+        case 7:
+          currentSVG = currentSVG.children[0].children[0];
+          currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
+          currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
+          break;
+
+        default:
+          console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
+      }
+    }
+  }
+}
+
 function recolorBottomSVG() {
   // TODO IF THE PLUS BUTTON OPENS A PANEL ABOVE IT INSTEAD OF
   //  SHOWING THE ICONS TO THE RIGHT OF IT, THIS CODE BREAKS
@@ -184,7 +411,7 @@ function recolorBottomSVG() {
   if (bottomSVGS.length === 13 ||
       (bottomSVGS.length === 11 && reactionIsImgAndNotThumb)) {
     console.log('group chat !?');
-    // recolorBottomSVGGroupChat();
+    recolorBottomSVGGroupChat();
     return;
   }
 
