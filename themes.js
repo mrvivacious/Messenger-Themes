@@ -43,6 +43,10 @@ let OUR_COLOR = '#FF94F0';
 let THEIR_COLOR = '#FFCEE3';
 let BACKGROUND_COLOR = '#624b5c';
 
+// text colourS todo
+let OUR_TEXT_COLOR = '#FFFFFF';
+let THEIR_TEXT_COLOR = '#000000';
+
 // O(n) for the elements, which is fine
 
 // https://stackoverflow.com/questions/48760542/time-complexity-of-includes-function-in-javascript
@@ -75,11 +79,17 @@ let BACKGROUND_COLOR = '#624b5c';
 
 // window.onload = () => {
   chrome.runtime.onMessage.addListener(acceptExtensionMessage);
-  setInterval(recolor, 1000);
+  setInterval(recolor, 300);
 // }
 
 function acceptExtensionMessage(request, sender, sendResponse) {
-  recolor(request.ourColor, request.theirColor, request.backgroundColor);
+  recolor(
+    request.ourColor,
+    request.theirColor,
+    request.backgroundColor,
+    request.ourTextColor,
+    request.theirTextColor
+  );
 }
 
 function recolorBackground() {
@@ -121,9 +131,12 @@ function recolorMessages() {
       //  OUR_COLOR won't show until this attribute is removed
       currentMessage.style.backgroundImage = '';
       currentMessage.style.backgroundColor = OUR_COLOR;
+
+      currentMessage.children[1].style.color = OUR_TEXT_COLOR;
     }
     else if (currentClass === THEIR_MESSAGES) {
       currentMessage.style.backgroundColor = THEIR_COLOR;
+      currentMessage.children[1].style.color = THEIR_TEXT_COLOR;
     }
     // Else, we found something that isn't a chat bubble, so
     //  let's not worry about it
@@ -684,11 +697,13 @@ function recolorMisc() {
   }
 }
 
-function recolor(ourColor, theirColor, backgroundColor) {
-  if (ourColor && theirColor && backgroundColor) {
+function recolor(ourColor, theirColor, backgroundColor, ourTextColor, theirTextColor) {
+  if (ourColor && theirColor && backgroundColor && ourTextColor && theirTextColor) {
     OUR_COLOR = ourColor;
     THEIR_COLOR = theirColor;
     BACKGROUND_COLOR = backgroundColor;
+    OUR_TEXT_COLOR = ourTextColor;
+    THEIR_TEXT_COLOR = theirTextColor;
     // alert(`${ourColor}, ${theirColor}, ${backgroundColor}`);
   }
 

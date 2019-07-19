@@ -11,6 +11,11 @@ let ourColor = '#' + inputs[0].value;
 let theirColor = '#' + inputs[1].value;
 let backgroundColor = '#' + inputs[2].value;
 
+// text color todo
+let ourTextColor = '#' + inputs[3].value;
+let theirTextColor = '#' + inputs[4].value;
+
+
 // ??? https://www.w3schools.com/jsref/event_onchange.asp
 for (let input = 0; input < inputs.length; input++) {
   inputs[input].addEventListener('change', show);
@@ -21,6 +26,10 @@ function show(event) {
   theirColor = '#' + inputs[1].value;
   backgroundColor = '#' + inputs[2].value;
 
+  // text colorz todo
+  ourTextColor = '#' + inputs[3].value;
+  theirTextColor = '#' + inputs[4].value;
+
   // alert(yourBubbleColor);
   // Get selected colors
   // Send message to themes.js to start reloading the preview colors
@@ -30,7 +39,13 @@ function show(event) {
   // https://github.com/mrvivacious/ahegao/commit/0fbb0c7cd4c6d2630e028d9f08daa3ff55a5ecd7
   chrome.tabs.query({active: true, currentWindow: true},
     function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {ourColor, theirColor, backgroundColor});
+      chrome.tabs.sendMessage(tabs[0].id, {
+        ourColor,
+        theirColor,
+        backgroundColor,
+        ourTextColor,
+        theirTextColor
+      });
     }
   )
 }
