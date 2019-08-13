@@ -9,11 +9,9 @@
 // TODO
 // find the small details!!!
 // Messages with reactions are immune to recoloring
-// Messages that are replies, the text inside is unaffected
 // URL message background needs to be recolored
 // URL itself inside message
 // The backgrounds of reactions on messages
-
 // When the information icon is open, recolor that stuff too
 
 // step 1
@@ -24,6 +22,7 @@ const ALL_MESSAGES = '_s1-';
 const OUR_MESSAGES = '_43by';
 const THEIR_MESSAGES = '_3oh-';
 const REPLY_MESSAGE = '_6uum';
+const MESSAGES_WITH_REACTION = '_5z-5';
 
 // Background
 // TOP: Top of the chat window, where the recipient's profile picture and
@@ -146,14 +145,26 @@ function recolorMessages() {
   // Recolor the messages
   let allMessages = document.getElementsByClassName(ALL_MESSAGES);
 
+  // Iterate over each message
   for (let i = 0; allMessages[i]; i++) {
     let currentMessage = allMessages[i];
-    let currentClass = currentMessage.classList[6];
+    // let currentClass = currentMessage.classList[6];
+    let currentClass = currentMessage.className;
 
-    if (currentClass === OUR_MESSAGES) {
+    if (currentClass.includes(OUR_MESSAGES)) {
+      // Does this message contain a reaction?
+      if (currentMessage.classList[0] &&
+        currentMessage.classList[0].includes(MESSAGES_WITH_REACTION)) {
+          currentMessage.style.background = OUR_COLOR;
+          // If the message contains a reaction and is also a reply,
+          //  color the text with this
+          // BUG ?? In the future, the child layout could change...
+          currentMessage.children[2].style.color = OUR_TEXT_COLOR;
+      }
+
       // Is this message a reply to another message?
       if (currentMessage.classList[9] &&
-        currentMessage.classList[9] === REPLY_MESSAGE) {
+        currentMessage.classList[9].includes(REPLY_MESSAGE)) {
           currentMessage.children[2].style.color = OUR_TEXT_COLOR;
       }
 
@@ -163,10 +174,16 @@ function recolorMessages() {
       currentMessage.style.backgroundColor = OUR_COLOR;
       currentMessage.children[1].style.color = OUR_TEXT_COLOR;
     }
-    else if (currentClass === THEIR_MESSAGES) {
+    else if (currentClass.includes(THEIR_MESSAGES)) {
+      // Does this message contain a reaction?
+      if (currentMessage.classList[0] &&
+        currentMessage.classList[0].includes(MESSAGES_WITH_REACTION)) {
+        currentMessage.style.background = THEIR_COLOR;
+      }
+
       // Is this message a reply to another message?
       if (currentMessage.classList[7] &&
-        currentMessage.classList[7] === REPLY_MESSAGE) {
+        currentMessage.classList[7].includes(REPLY_MESSAGE)) {
           currentMessage.children[2].style.color = THEIR_TEXT_COLOR;
       }
 
