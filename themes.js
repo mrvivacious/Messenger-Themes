@@ -4,11 +4,16 @@
 //
 // @Author Vivek Bhookya (mrvivacious)
 
+// Current:
+
 // TODO
 // find the small details!!!
-// Messages with reactions somehow become immune to recoloring
+// Messages with reactions are immune to recoloring
+// Messages that are replies, the text inside is unaffected
 // URL message background needs to be recolored
-// The reactions on messages needs to be recolored
+// URL itself inside message
+// The backgrounds of reactions on messages
+
 // When the information icon is open, recolor that stuff too
 
 // step 1
@@ -18,6 +23,7 @@
 const ALL_MESSAGES = '_s1-';
 const OUR_MESSAGES = '_43by';
 const THEIR_MESSAGES = '_3oh-';
+const REPLY_MESSAGE = '_6uum';
 
 // Background
 // TOP: Top of the chat window, where the recipient's profile picture and
@@ -145,14 +151,25 @@ function recolorMessages() {
     let currentClass = currentMessage.classList[6];
 
     if (currentClass === OUR_MESSAGES) {
+      // Is this message a reply to another message?
+      if (currentMessage.classList[9] &&
+        currentMessage.classList[9] === REPLY_MESSAGE) {
+          // TODO
+      }
+
       // Dynamic themes have a background-image attribute,
       //  OUR_COLOR won't show until this attribute is removed
       currentMessage.style.backgroundImage = '';
       currentMessage.style.backgroundColor = OUR_COLOR;
-
       currentMessage.children[1].style.color = OUR_TEXT_COLOR;
     }
     else if (currentClass === THEIR_MESSAGES) {
+      // Is this message a reply to another message?
+      if (currentMessage.classList[7] &&
+        currentMessage.classList[7] === REPLY_MESSAGE) {
+          currentMessage.children[2].style.color = THEIR_TEXT_COLOR;
+      }
+      
       currentMessage.style.backgroundColor = THEIR_COLOR;
       currentMessage.children[1].style.color = THEIR_TEXT_COLOR;
     }
