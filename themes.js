@@ -4,15 +4,10 @@
 //
 // @Author Vivek Bhookya (mrvivacious)
 
-// Current:
-
 // TODO
-// find the small details!!!
-// Messages with reactions are immune to recoloring
-// URL message background needs to be recolored
-// URL itself inside message
-// The backgrounds of reactions on messages
-// When the information icon is open, recolor that stuff too
+// Recolor based on user input events instead of a time interval cuz
+//  this will feel more responsive and avoids "non colored"-down time
+// URL itself inside message (no priority)
 
 // step 1
 // grab the classes of Messenger's text and misc elements
