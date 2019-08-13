@@ -179,6 +179,7 @@ function recolorMessages() {
       if (currentMessage.classList[0] &&
         currentMessage.classList[0].includes(MESSAGES_WITH_REACTION)) {
         currentMessage.style.background = THEIR_COLOR;
+        currentMessage.children[2].style.color = THEIR_TEXT_COLOR;
       }
 
       // Is this message a reply to another message?
