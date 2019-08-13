@@ -6,53 +6,63 @@
 // @author Vivek Bhookya (mrvivacious)
 // @author Linus Zhu (linuszhu1031)
 
+const inputIDs = [
+  'ourColor',
+  'theirColor',
+  'backgroundColor',
+  'ourTextColor',
+  'theirTextColor'
+];
+
 fetchColors();
 
+// Function fetchColors
+// Reads the saved colors from storage and populates the popup accordingly
 function fetchColors() {
   chrome.storage.sync.get('colors', function(colorsList) {
     let theMe = colorsList.colors[0];
 
-    let inputIDs = [
-      'ourColor',
-      'theirColor',
-      'backgroundColor',
-      'ourTextColor',
-      'theirTextColor'
-    ];
-
     for (let id = 0; inputIDs[id]; id++) {
-      document.getElementById(inputIDs[id]).value = theMe[id];
+      // Remove the hashtag because we add the hashtag to the color hexcode
+      //  later in the code and using "##..." hexcode is a big bug
+      document.getElementById(inputIDs[id]).value = theMe[id].replace('#', '');
       document.getElementById(inputIDs[id]).style.backgroundColor = theMe[id];
     }
-
   });
 }
 
-let inputs = document.getElementsByTagName('input');
-let ourColor = '#' + inputs[0].value;
-let theirColor = '#' + inputs[1].value;
-let backgroundColor = '#' + inputs[2].value;
+// Save our stored colors for later use
+let ourColor = '#' + document.getElementById(inputIDs[0]).value;
+let theirColor = '#' + document.getElementById(inputIDs[1]).value;
+let backgroundColor = '#' + document.getElementById(inputIDs[2]).value;
+let ourTextColor = '#' + document.getElementById(inputIDs[3]).value;
+let theirTextColor = '#' + document.getElementById(inputIDs[4]).value;
 
-// text color todo
-let ourTextColor = '#' + inputs[3].value;
-let theirTextColor = '#' + inputs[4].value;
-
+// Give save-to-storage functionality to the save button
 let button_save = document.getElementById('save');
 button_save.addEventListener('click', store);
 
+// Add event listeners to all the inputs in the popup in order to enable
+//  "live coloring preview"
+let inputs = document.getElementsByTagName('input');
+
 // ??? https://www.w3schools.com/jsref/event_onchange.asp
 for (let input = 0; input < inputs.length; input++) {
-  inputs[input].addEventListener('change', show);
+  inputs[input].addEventListener('change', previewCurrentColors);
 }
 
-function show(event) {
-  ourColor = '#' + inputs[0].value;
-  theirColor = '#' + inputs[1].value;
-  backgroundColor = '#' + inputs[2].value;
+// Function previewCurrentColors
+// Send a message from the popup to the window with the selected colorway
+//  so that the window can update the Messenger interface with the new colors
+//  for the user to preview
+function previewCurrentColors(event) {
+  ourColor = '#' + document.getElementById(inputIDs[0]).value;
+  theirColor = '#' + document.getElementById(inputIDs[1]).value;
+  backgroundColor = '#' + document.getElementById(inputIDs[2]).value;
 
-  // text colorz todo
-  ourTextColor = '#' + inputs[3].value;
-  theirTextColor = '#' + inputs[4].value;
+  // text color todo
+  ourTextColor = '#' + document.getElementById(inputIDs[3]).value;
+  theirTextColor = '#' + document.getElementById(inputIDs[4]).value;
 
   // alert(yourBubbleColor);
   // Get selected colors
@@ -74,6 +84,7 @@ function show(event) {
   )
 }
 
+// Function store
 // Store the user selected values into localStorage
 function store() {
   // var inputOurColor = '#' + inputs[0];

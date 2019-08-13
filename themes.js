@@ -764,5 +764,4 @@ function recolor(ourColor, theirColor, backgroundColor, ourTextColor, theirTextC
   recolorSVG();
 
   recolorBottomSVG();
-
 }
