@@ -154,7 +154,7 @@ function recolorMessages() {
       // Is this message a reply to another message?
       if (currentMessage.classList[9] &&
         currentMessage.classList[9] === REPLY_MESSAGE) {
-          // TODO
+          currentMessage.children[2].style.color = OUR_TEXT_COLOR;
       }
 
       // Dynamic themes have a background-image attribute,
@@ -169,7 +169,7 @@ function recolorMessages() {
         currentMessage.classList[7] === REPLY_MESSAGE) {
           currentMessage.children[2].style.color = THEIR_TEXT_COLOR;
       }
-      
+
       currentMessage.style.backgroundColor = THEIR_COLOR;
       currentMessage.children[1].style.color = THEIR_TEXT_COLOR;
     }
