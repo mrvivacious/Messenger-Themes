@@ -36,8 +36,33 @@
 
   <style>
     body {
-      width: 415px;
-      /* height: 285px; */
+      font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+      font-size: 14px;
+      width: 350px;
+      /* height: 320px; */
+    }
+
+    .jscolor {
+      /* width: 54vw;
+      height: 36px; */
+      font-size: 14px;
+
+      margin-left: 10vw;
+
+      /* padding: 0px;
+      margin: 0px;
+      border: 0px; */
+    }
+
+    p {
+      font-size: 16px;
+      margin-left: 5vw;
+
+    }
+
+    strong {
+      font-size: 22px;
+      font-style: italic;
     }
   </style>
 
@@ -55,79 +80,22 @@
 <body>
   <h1>Themes for Messenger</h1>
 
-  <strong>Preset Themes</strong>
+  <!-- <strong>Preset Themes</strong> -->
+  <!-- <strong>Hex color chooser goes below</strong> -->
 
-  <div>
-    <p>
-      <!-- Rounded switch -->
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider round"></span>
-      </label>
-
-      Dark
-    </p>
-  </div>
-
-  <div>
-    <p>
-      <!-- Rounded switch -->
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider round"></span>
-      </label>
-
-      Light
-    </p>
-  </div>
-
-  <div>
-    <p>
-      <!-- Rounded switch -->
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider round"></span>
-      </label>
-
-      Some sort of RGB blindness
-    </p>
-  </div>
-
-  <div>
-    <p>
-      <!-- Rounded switch -->
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider round"></span>
-      </label>
-
-      Linus
-    </p>
-  </div>
-
-  <div>
-    <p>
-      <!-- Rounded switch -->
-      <label class="switch">
-        <input type="checkbox">
-        <span class="slider round"></span>
-      </label>
-
-      Vivek
-    </p>
-  </div>
-
-  <strong>Hex color chooser goes below</strong>
-
-  <p>Choose your chat bubble color:
+  <strong>Chat colors:</strong>
+  <p>Your chat bubble color:
+    <br>
     <input class="jscolor" id="ourColor" value="FF94F0">
   </p>
 
-  <p>Choose their chat bubble color:
+  <p>Their chat bubble color:
+    <br>
     <input class="jscolor" id="theirColor" value="FFCEE3">
   </p>
 
-  <p>Choose your background color:
+  <p>The background color:
+    <br>
     <input class="jscolor" id="backgroundColor" value="624B5C">
   </p>
 
@@ -135,14 +103,15 @@
 
   <strong>Text colors:</strong>
 
-  <p>Choose your text color:
+  <p>Your text color:
+    <br>
     <input class="jscolor" id="ourTextColor" value="FFFFFF">
   </p>
 
-  <p>Choose their text color:
+  <p>Their text color:
+    <br>
     <input class="jscolor" id="theirTextColor" value="000000">
   </p>
-
 
   <!-- Thank you, -->
   <!-- https://github.com/mrvivacious/PorNo-_public/blob/master/popup.html#L258 -->
@@ -155,8 +124,75 @@
 
   <!-- Save button -->
   <button id="save">Save</button>
-
+  <br><br>
+  <hr>
   <br>
+
+  <!-- THEME LIST GOES BELOW -->
+  <strong>Saved TheMes</strong>
+
+  <div id="themeList">
+    <div>
+      <p>
+        <!-- Rounded switch -->
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+
+        Dark (black theme)
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <!-- Rounded switch -->
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+
+        Darcula
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <!-- Rounded switch -->
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+
+        High contrast
+        <span>colors go here swatch</span>
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <!-- Rounded switch -->
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+
+        Linus
+      </p>
+    </div>
+
+    <div>
+      <p>
+        <!-- Rounded switch -->
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+
+        Vivek
+      </p>
+    </div>
+  </div>
 </body>
 
 <!-- Scripts go outside of the body -->

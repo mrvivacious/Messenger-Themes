@@ -5,6 +5,11 @@
 // @Author Vivek Bhookya (mrvivacious)
 
 // TODO
+// o Users add custom theme profiles
+// o Storage for the theme profiles
+// o Support for editing and deleting profiles
+// o Display theme profiles as [Name] | [Color swatches]
+// o Add links to GitHub, source code, etc
 // Recolor based on user input events instead of a time interval cuz
 //  this will feel more responsive and avoids "non colored"-down time
 // URL itself inside message (no priority)
@@ -167,7 +172,12 @@ function recolorMessages() {
       //  OUR_COLOR won't show until this attribute is removed
       currentMessage.style.backgroundImage = '';
       currentMessage.style.backgroundColor = OUR_COLOR;
-      currentMessage.children[1].style.color = OUR_TEXT_COLOR;
+
+
+      // TODO silence dumbfuck bug until further investigation
+      if (currentMessage.children[1]) {
+        currentMessage.children[1].style.color = OUR_TEXT_COLOR;
+      }
     }
     else if (currentClass.includes(THEIR_MESSAGES)) {
       // Does this message contain a reaction?
@@ -184,7 +194,11 @@ function recolorMessages() {
       }
 
       currentMessage.style.backgroundColor = THEIR_COLOR;
-      currentMessage.children[1].style.color = THEIR_TEXT_COLOR;
+
+      // TODO silence dumbfuck bug until further investigation
+      if (currentMessage.children[1]) {
+        currentMessage.children[1].style.color = THEIR_TEXT_COLOR;
+      }
     }
     // Else, we found something that isn't a chat bubble, so
     //  let's not worry about it
