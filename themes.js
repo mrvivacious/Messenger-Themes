@@ -9,6 +9,7 @@
 // o Storage for the theme profiles
 // o Support for editing and deleting profiles
 // o Display theme profiles as [Name] | [Color swatches]
+// o Option to recolor the info text on the site (ie. cannot read when background is black)
 // o Add links to GitHub, source code, etc
 // Recolor based on user input events instead of a time interval cuz
 //  this will feel more responsive and avoids "non colored"-down time

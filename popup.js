@@ -14,11 +14,11 @@ const inputIDs = [
   'theirTextColor'
 ];
 
-fetchColors();
+fetchColorsAndFillPopup();
 
-// Function fetchColors
+// Function fetchColorsAndFillPopup
 // Reads the saved colors from storage and populates the popup accordingly
-function fetchColors() {
+function fetchColorsAndFillPopup() {
   chrome.storage.sync.get('colors', function(colorsList) {
     let theMe = colorsList.colors[0];
 
@@ -45,10 +45,33 @@ button_save.addEventListener('click', saveClicked);
 // Add event listeners to all the inputs in the popup in order to enable
 //  "live coloring preview"
 let inputs = document.getElementsByTagName('input');
+let lis = document.getElementsByTagName('li');
 
 // ??? https://www.w3schools.com/jsref/event_onchange.asp
 for (let input = 0; input < inputs.length; input++) {
   inputs[input].addEventListener('change', previewCurrentColors);
+}
+
+for (let li = 0; li < lis.length; li++) {
+  lis[li].addEventListener('click', loadTheme);
+}
+
+function loadTheme(e) {
+  let source = e.srcElement;
+  // alert(source.toString());
+
+  if (source.toString().includes('HTMLLIElement')) {
+    let swatches = source.children[0].children;
+
+    // get colors
+    alert(swatches[0].style.backgroundColor)
+    // send message
+    // update storage
+
+  }
+  else if (source.toString().includes('HTMLSpanElement')) {
+    alert('span');
+  }
 }
 
 // Function previewCurrentColors
