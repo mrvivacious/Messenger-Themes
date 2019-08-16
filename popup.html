@@ -37,33 +37,61 @@
   <style>
     body {
       font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+      /* font-family: "Times New Roman", TimesNewRoman, sans-serif; */
       font-size: 14px;
-      width: 350px;
+      width: 400px;
+      background-color: white;
       /* height: 320px; */
     }
 
     .jscolor {
       /* width: 54vw;
       height: 36px; */
-      font-size: 14px;
-
+      font-size: 12px;
       margin-left: 10vw;
 
-      /* padding: 0px;
-      margin: 0px;
-      border: 0px; */
+      /* padding: 0px; */
+      border: 0px;
     }
 
     p {
-      font-size: 16px;
+      font-size: 14px;
       margin-left: 5vw;
-
     }
 
     strong {
-      font-size: 22px;
-      font-style: italic;
+      font-size: 14px;
+      /* font-style: italic; */
+      /* color: blue; */
     }
+
+    h1 {
+      font-size: 18px;
+      /* color: blue; */
+    }
+
+    #container {
+      height: 100%;
+      width: 100%;
+      display: flex;
+    }
+
+    #left {
+      width: 52%;
+    }
+
+    /* Thank you, */
+    /* https://www.geeksforgeeks.org/how-to-make-a-vertical-line-using-html/ */
+    #middle {
+      width: 3%;
+      border-left: 1px solid black;
+    }
+
+    #right {
+      width: 43%;
+    }
+
+
   </style>
 
   <link rel="stylesheet" href="style.css">
@@ -78,119 +106,130 @@
 </head>
 
 <body>
-  <h1>Themes for Messenger</h1>
+  <center><h1>Themes for Messenger</h1></center>
 
   <!-- <strong>Preset Themes</strong> -->
   <!-- <strong>Hex color chooser goes below</strong> -->
 
-  <strong>Chat colors:</strong>
-  <p>Your chat bubble color:
-    <br>
-    <input class="jscolor" id="ourColor" value="FF94F0">
-  </p>
+  <div id="container">
 
-  <p>Their chat bubble color:
-    <br>
-    <input class="jscolor" id="theirColor" value="FFCEE3">
-  </p>
-
-  <p>The background color:
-    <br>
-    <input class="jscolor" id="backgroundColor" value="624B5C">
-  </p>
-
-  <!-- Text -->
-
-  <strong>Text colors:</strong>
-
-  <p>Your text color:
-    <br>
-    <input class="jscolor" id="ourTextColor" value="FFFFFF">
-  </p>
-
-  <p>Their text color:
-    <br>
-    <input class="jscolor" id="theirTextColor" value="000000">
-  </p>
-
-  <!-- Thank you, -->
-  <!-- https://github.com/mrvivacious/PorNo-_public/blob/master/popup.html#L258 -->
-  <!-- Input field for link -->
-  <strong>Save this TheMe:</strong>
-
-  <!-- Input field for name -->
-  <p><em>Name:</em></p>
-  <input style="color:black;" type="text" class="input_text" id="INPUT_name" placeholder="My brand new TheMe ~">
-
-  <!-- Save button -->
-  <button id="save">Save</button>
-  <br><br>
-  <hr>
-  <br>
-
-  <!-- THEME LIST GOES BELOW -->
-  <strong>Saved TheMes</strong>
-
-  <div id="themeList">
-    <div>
-      <p>
-        <!-- Rounded switch -->
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider round"></span>
-        </label>
-
-        Dark (black theme)
+    <div id="left">
+      <strong>Chat colors:</strong>
+      <p>Your chat bubble color:
+        <br>
+        <input class="jscolor" id="ourColor" value="FF94F0">
       </p>
+
+      <p>Their chat bubble color:
+        <br>
+        <input class="jscolor" id="theirColor" value="FFCEE3">
+      </p>
+
+      <p>The background color:
+        <br>
+        <input class="jscolor" id="backgroundColor" value="624B5C">
+      </p>
+
+      <!-- Text -->
+
+      <strong>Text colors:</strong>
+
+      <p>Your text color:
+        <br>
+        <input class="jscolor" id="ourTextColor" value="FFFFFF">
+      </p>
+
+      <p>Their text color:
+        <br>
+        <input class="jscolor" id="theirTextColor" value="000000">
+      </p>
+
+      <!-- Thank you, -->
+      <!-- https://github.com/mrvivacious/PorNo-_public/blob/master/popup.html#L258 -->
+      <!-- Input field for link -->
+      <strong>Save this TheMe:</strong>
+
+      <!-- Input field for name -->
+      <p>Name:</p>
+      <input style="color:black;" type="text" class="input_text" id="INPUT_name" placeholder="My brand new TheMe ~">
+
+      <!-- Save button -->
+      <button id="save">Save</button>
+      <br><br>
+
+      <hr style="width:1px;size:100px;">
+
+      <br>
     </div>
 
-    <div>
-      <p>
-        <!-- Rounded switch -->
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider round"></span>
-        </label>
+    <div id="middle"></div>
 
-        Darcula
-      </p>
-    </div>
+    <div id="right">
+      <!-- THEME LIST GOES BELOW -->
+      <strong>Saved TheMes</strong>
 
-    <div>
-      <p>
-        <!-- Rounded switch -->
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider round"></span>
-        </label>
+      <div id="themeList">
+        <div>
+          <p>
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
 
-        High contrast
-        <span>colors go here swatch</span>
-      </p>
-    </div>
+            Dark (black theme)
+          </p>
+        </div>
 
-    <div>
-      <p>
-        <!-- Rounded switch -->
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider round"></span>
-        </label>
+        <div>
+          <p>
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
 
-        Linus
-      </p>
-    </div>
+            Darcula
+          </p>
+        </div>
 
-    <div>
-      <p>
-        <!-- Rounded switch -->
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider round"></span>
-        </label>
+        <div>
+          <p>
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
 
-        Vivek
-      </p>
+            High contrast
+            <span>colors go here swatch</span>
+          </p>
+        </div>
+
+        <div>
+          <p>
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+
+            Linus
+          </p>
+        </div>
+
+        <div>
+          <p>
+            <!-- Rounded switch -->
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+
+            Vivek
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </body>
