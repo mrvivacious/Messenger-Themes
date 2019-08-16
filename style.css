@@ -57,24 +57,46 @@ input:checked+.slider:before {
   border-radius: 50%;
 }
 
+/* ************* */
+
 /* Thank you, */
 /* https://github.com/mrvivacious/PorNo-_public/blob/master/popup.html#L168 */
 /* Style the input */
 .input_text {
   border: none;
-  width: 95%;
-  /* padding: 10px; */
+  width: 90%;
   margin: 10px;
   margin-top: 0px;
   margin-bottom: 10px;
   float: left;
-  font-size: 12px;
-  outline-style: none;
+  font-size: 16px;
+  /* outline-style: none; */
   outline-width: 1px;
   outline-color: black;
 }
 
-/* ************* */
+/* Thank you */
+/* https://github.com/mrvivacious/PorNo-_public/blob/master/popup.html#L92 */
+/* Style the "Add" button */
+#save {
+  float: center;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+
+  background-color: #D7A6CC;
+
+  transition: 0.7s;
+
+  width: 95%;
+  height: 24px;
+}
+
+#save:hover {
+  background-color: lightgreen;
+  /* color: blanchedAlmond; */
+}
+
 
 body {
   font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;

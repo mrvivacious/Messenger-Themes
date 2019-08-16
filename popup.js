@@ -40,7 +40,7 @@ let theirTextColor = '#' + document.getElementById(inputIDs[4]).value;
 
 // Give save-to-storage functionality to the save button
 let button_save = document.getElementById('save');
-button_save.addEventListener('click', store);
+button_save.addEventListener('click', saveClicked);
 
 // Add event listeners to all the inputs in the popup in order to enable
 //  "live coloring preview"
@@ -82,6 +82,41 @@ function previewCurrentColors(event) {
       });
     }
   )
+}
+
+function saveClicked() {
+  // √ Save to storage
+  // store();
+
+  // o Build TheMe UI element
+  addTheMe();
+
+
+  // o Add element to list of TheMes
+}
+
+function addTheMe() {
+  // Get TheMe name from the input field
+  let name = document.getElementById('INPUT_name').value.trim();
+
+  if (!name.length) {
+    alert('add a name lmao');
+    return;
+  }
+
+  // Make li and text objects
+  let li = document.createElement("li");
+  let t = document.createTextNode(name);
+
+  // Append text to li so we can show the text
+  li.appendChild(t);
+
+  // Add to TheMe list
+  document.getElementById('themeList').appendChild(li);
+
+
+  // Clear input field
+  document.getElementById('INPUT_name').value = '';
 }
 
 // Function store
