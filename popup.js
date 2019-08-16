@@ -90,33 +90,71 @@ function saveClicked() {
 
   // o Build TheMe UI element
   addTheMe();
-
-
-  // o Add element to list of TheMes
 }
 
 function addTheMe() {
   // Get TheMe name from the input field
   let name = document.getElementById('INPUT_name').value.trim();
 
-  if (!name.length) {
-    alert('add a name lmao');
-    return;
-  }
+  //todo uncomment
+  // if (!name.length) {
+  //   alert('add a name lmao');
+  //   return;
+  // }
 
   // Make li and text objects
-  let li = document.createElement("li");
+  let br = document.createElement('br');
+  let li = document.createElement('li');
   let t = document.createTextNode(name);
 
   // Append text to li so we can show the text
   li.appendChild(t);
 
+  // Append the color palette to the li
+  buildColorPalette(li);
+
   // Add to TheMe list
   document.getElementById('themeList').appendChild(li);
+  document.getElementById('themeList').appendChild(br);
+  document.getElementById('themeList').appendChild(br);
 
 
   // Clear input field
   document.getElementById('INPUT_name').value = '';
+}
+
+function buildColorPalette(li) {
+  // We already have the colors from the member variables at the top of the file
+  // Build the freaking css and add the classes
+  let div = document.createElement('div');
+  div.className = 'swatches';
+
+  let first = document.createElement('span');
+  let second = document.createElement('span');
+  let third = document.createElement('span');
+  let fourth = document.createElement('span');
+  let fifth = document.createElement('span');
+
+  first.className = 'first';
+  second.className = 'second';
+  third.className = 'third';
+  fourth.className = 'fourth';
+  fifth.className = 'fifth';
+
+  first.style.backgroundColor = ourColor;
+  second.style.backgroundColor = theirColor;
+  third.style.backgroundColor = backgroundColor;
+  fourth.style.backgroundColor = ourTextColor;
+  fifth.style.backgroundColor = theirTextColor;
+
+  div.appendChild(first);
+  div.appendChild(second);
+  div.appendChild(third);
+  div.appendChild(fourth);
+  div.appendChild(fifth);
+
+  // Append to li
+  li.appendChild(div);
 }
 
 // Function store
