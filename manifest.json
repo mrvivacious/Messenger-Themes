@@ -1,14 +1,14 @@
 {
   "manifest_version": 2,
 
-  "name": "Themes for Messenger",
+  "name": "TheMes: Themes for Messenger",
   "description": "Saving your eyes",
   "version": "0.0.1.0",
-  "author": "Linus Zhu",
+  "author": "Linus Zhu and Vivek Bhookya",
 
   "browser_action": {
     "default_popup": "popup.html",
-    "default_title": "Themes for Messenger"
+    "default_title": "TheMes"
   },
 
   "background": {
