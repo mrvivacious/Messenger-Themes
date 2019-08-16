@@ -34,66 +34,6 @@
 <head>
   <title>Messenger Themes Options</title>
 
-  <style>
-    body {
-      font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-      /* font-family: "Times New Roman", TimesNewRoman, sans-serif; */
-      font-size: 14px;
-      width: 400px;
-      background-color: white;
-      /* height: 320px; */
-    }
-
-    .jscolor {
-      /* width: 54vw;
-      height: 36px; */
-      font-size: 12px;
-      margin-left: 10vw;
-
-      /* padding: 0px; */
-      border: 0px;
-    }
-
-    p {
-      font-size: 14px;
-      margin-left: 5vw;
-    }
-
-    strong {
-      font-size: 14px;
-      /* font-style: italic; */
-      /* color: blue; */
-    }
-
-    h1 {
-      font-size: 18px;
-      /* color: blue; */
-    }
-
-    #container {
-      height: 100%;
-      width: 100%;
-      display: flex;
-    }
-
-    #left {
-      width: 52%;
-    }
-
-    /* Thank you, */
-    /* https://www.geeksforgeeks.org/how-to-make-a-vertical-line-using-html/ */
-    #middle {
-      width: 3%;
-      border-left: 1px solid black;
-    }
-
-    #right {
-      width: 43%;
-    }
-
-
-  </style>
-
   <link rel="stylesheet" href="style.css">
 
   <!-- Put the script in the header if you want to "pre-load" the script -->
@@ -168,10 +108,9 @@
       <!-- THEME LIST GOES BELOW -->
       <strong>Saved TheMes</strong>
 
-      <div id="themeList">
-        <div>
+      <ul id="themeList">
+        <!-- <div>
           <p>
-            <!-- Rounded switch -->
             <label class="switch">
               <input type="checkbox">
               <span class="slider round"></span>
@@ -179,11 +118,57 @@
 
             Dark (black theme)
           </p>
-        </div>
+        </div> -->
+        <li>Dark black theme
+          <div class="swatches">
+            <span class="first"></span>
+            <span class="second"></span>
+            <span class="third"></span>
+            <span class="fourth"></span>
+            <span class="fifth"></span>
+          </div>
+        </li>
+        <br>
+        <br>
 
-        <div>
+        <li>High contrast
+          <div class="swatches">
+            <div class="first"></div>
+            <div class="second"></div>
+            <div class="third"></div>
+            <div class="fourth"></div>
+            <div class="fifth"></div>
+          </div>
+        </li>
+        <br>
+        <br>
+
+        <li>Linus
+          <div class="swatches">
+            <div class="first"></div>
+            <div class="second"></div>
+            <div class="third"></div>
+            <div class="fourth"></div>
+            <div class="fifth"></div>
+          </div>
+        </li>
+        <br>
+        <br>
+
+        <li>Vivek
+          <div class="swatches">
+            <div class="first"></div>
+            <div class="second"></div>
+            <div class="third"></div>
+            <div class="fourth"></div>
+            <div class="fifth"></div>
+          </div>
+        </li>
+        <br>
+        <br>
+
+        <!-- <div>
           <p>
-            <!-- Rounded switch -->
             <label class="switch">
               <input type="checkbox">
               <span class="slider round"></span>
@@ -195,7 +180,6 @@
 
         <div>
           <p>
-            <!-- Rounded switch -->
             <label class="switch">
               <input type="checkbox">
               <span class="slider round"></span>
@@ -208,7 +192,6 @@
 
         <div>
           <p>
-            <!-- Rounded switch -->
             <label class="switch">
               <input type="checkbox">
               <span class="slider round"></span>
@@ -220,7 +203,6 @@
 
         <div>
           <p>
-            <!-- Rounded switch -->
             <label class="switch">
               <input type="checkbox">
               <span class="slider round"></span>
@@ -228,8 +210,9 @@
 
             Vivek
           </p>
-        </div>
-      </div>
+        </div> -->
+      </ul>
+      <!-- Close theMe list -->
     </div>
   </div>
 </body>

@@ -74,6 +74,153 @@ input:checked+.slider:before {
   outline-color: black;
 }
 
+/* ************* */
+
+body {
+  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  /* font-family: "Times New Roman", TimesNewRoman, sans-serif; */
+  font-size: 14px;
+  width: 400px;
+  background-color: white;
+  /* height: 320px; */
+}
+
+.jscolor {
+  /* width: 54vw;
+  height: 36px; */
+  font-size: 12px;
+  margin-left: 10vw;
+
+  /* padding: 0px; */
+  border: 0px;
+}
+
+p {
+  font-size: 14px;
+  margin-left: 5vw;
+}
+
+strong {
+  font-size: 14px;
+  /* font-style: italic; */
+  /* color: blue; */
+}
+
+h1 {
+  font-size: 18px;
+  /* color: blue; */
+}
+
+/* Thank you, */
+/* https://github.com/mrvivacious/mrvivacious.github.io/blob/master/styles.css */
+#container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+#left {
+  width: 52%;
+}
+
+/* Thank you, */
+/* https://www.geeksforgeeks.org/how-to-make-a-vertical-line-using-html/ */
+#middle {
+  width: 3%;
+  border-left: 1px solid black;
+}
+
+#right {
+  width: 43%;
+}
+
+/* Thank you, */
+/* https://github.com/mrvivacious/PorNo-_public/blob/master/popup.html#L66 */
+li {
+  cursor: pointer;
+  list-style-type: none;
+  padding: 5px;
+
+  transition: 0.2s;
+
+  /* make the list items unselectable/unhighlightable */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Darker background-color on hover */
+li:hover {
+  background: #D7A6CC;
+  color: black;
+}
+
+.swatches {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.first {
+  background-color: blue;
+  width: 20%;
+  padding-left: 10px;
+  height: 15px;
+
+  /* border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black; */
+}
+
+.second {
+  background-color: orange;
+  width: 20%;
+  padding-left: 10px;
+  height: 15px;
+
+  /* border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black; */
+}
+
+.third {
+  background-color: red;
+  width: 20%;
+  padding-left: 10px;
+  height: 15px;
+
+  /* border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black; */
+}
+
+.fourth {
+  background-color: pink;
+  width: 20%;
+  padding-left: 10px;
+  height: 15px;
+
+  /* border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black; */
+}
+
+.fifth {
+  background-color: green;
+  width: 19%;
+  padding-left: 10px;
+  height: 15px;
+
+  /* border-left: 1px solid black;
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black; */
+}
 
 hr {
   color: black;
