@@ -18,17 +18,25 @@ fetchColorsAndFillPopup();
 
 // Function fetchColorsAndFillPopup
 // Reads the saved colors from storage and populates the popup accordingly
-function fetchColorsAndFillPopup() {
-  chrome.storage.sync.get('colors', function(colorsList) {
-    let theMe = colorsList.colors[0];
+function fetchColorsAndFillPopup(themeFromMenu) {
+  if (!themeFromMenu) {
+    chrome.storage.sync.get('colors', function(colorsList) {
+      let theMe = colorsList.colors[0];
 
-    for (let id = 0; inputIDs[id]; id++) {
-      // Remove the hashtag because we add the hashtag to the color hexcode
-      //  later in the code and using "##..." hexcode is a big bug
-      document.getElementById(inputIDs[id]).value = theMe[id].replace('#', '');
-      document.getElementById(inputIDs[id]).style.backgroundColor = theMe[id];
+      for (let id = 0; inputIDs[id]; id++) {
+        // Remove the hashtag because we add the hashtag to the color hexcode
+        //  later in the code and using "##..." hexcode is a big bug
+        document.getElementById(inputIDs[id]).value = theMe[id].replace('#', '');
+        document.getElementById(inputIDs[id]).style.backgroundColor = theMe[id];
+      }
+    });
+  }
+  else {
+    for (let color = 0; themeFromMenu[color]; color++) {
+      document.getElementById(inputIDs[color]).value = themeFromMenu[color].replace('#', '');
+      document.getElementById(inputIDs[color]).style.backgroundColor = themeFromMenu[color];
     }
-  });
+  }
 }
 
 // Save our stored colors for later use
@@ -83,7 +91,23 @@ function loadTheme(e) {
       }
     )
 
-    // update storage
+    // update popup and storage
+    fetchColorsAndFillPopup([
+      ourColor,
+      theirColor,
+      backgroundColor,
+      ourTextColor,
+      theirTextColor
+    ]);
+
+    store([
+      ourColor,
+      theirColor,
+      backgroundColor,
+      ourTextColor,
+      theirTextColor
+    ]);
+
   }
   else if (source.toString().includes('HTMLSpanElement')) {
     alert('span');
@@ -243,7 +267,7 @@ function buildColorPalette(li) {
 
 // Function store
 // Store the user selected values into localStorage
-function store() {
+function store(themeFromMenu) {
   // var inputOurColor = '#' + inputs[0];
   // var inputTheirColor = '#' + inputs[1];
   // var inputBackgroundColor = '#' + inputs[2];
@@ -262,18 +286,23 @@ function store() {
   // localStorage.setItem(inputOurTextColor, inputOur);
   // localStorage.setItem(inputTheirTextColor, backgroundColor);
 
-  let colors = [
-    ourColor,
-    theirColor,
-    backgroundColor,
-    ourTextColor,
-    theirTextColor
-  ];
+  if (!themeFromMenu) {
+    let colors = [
+      ourColor,
+      theirColor,
+      backgroundColor,
+      ourTextColor,
+      theirTextColor
+    ];
 
-  // Save to storage.sync
-  // Thank you,
-  // https://github.com/mrvivacious/ahegao/blob/master/popupFunctions.js#L45
-  chrome.storage.sync.set({colors:[colors]}, function() {
-    // Any code to run after saving
-  });
+    // Save to storage.sync
+    // Thank you,
+    // https://github.com/mrvivacious/ahegao/blob/master/popupFunctions.js#L45
+    chrome.storage.sync.set({colors:[colors]}, function() {
+      // Any code to run after saving
+    });
+  }
+  else {
+    chrome.storage.sync.set({colors:[themeFromMenu]}, function() {});
+  }
 }
