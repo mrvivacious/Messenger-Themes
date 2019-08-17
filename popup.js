@@ -66,52 +66,56 @@ for (let li = 0; li < lis.length; li++) {
 
 function loadTheme(e) {
   let source = e.srcElement;
-  // alert(source.toString());
+  let swatches;
 
-  if (source.toString().includes('HTMLLIElement')) {
-    let swatches = source.children[0].children;
-
-    // get colors
-    ourColor = rgbToHex(swatches[0].style.backgroundColor);
-    theirColor = rgbToHex(swatches[1].style.backgroundColor);
-    backgroundColor = rgbToHex(swatches[2].style.backgroundColor);
-    ourTextColor = rgbToHex(swatches[3].style.backgroundColor);
-    theirTextColor = rgbToHex(swatches[4].style.backgroundColor);
-
-    // send message
-    chrome.tabs.query({active: true, currentWindow: true},
-      function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, {
-          ourColor,
-          theirColor,
-          backgroundColor,
-          ourTextColor,
-          theirTextColor
-        });
-      }
-    )
-
-    // update popup and storage
-    fetchColorsAndFillPopup([
-      ourColor,
-      theirColor,
-      backgroundColor,
-      ourTextColor,
-      theirTextColor
-    ]);
-
-    store([
-      ourColor,
-      theirColor,
-      backgroundColor,
-      ourTextColor,
-      theirTextColor
-    ]);
-
+  // Find the list of swatches
+  if (source.toString().includes('HTMLDivElement')) {
+    swatches = source.parentElement.children;
   }
-  else if (source.toString().includes('HTMLSpanElement')) {
-    alert('span');
+  else if (source.toString().includes('HTMLLIElement')) {
+    swatches = source.children[0].children;
   }
+  else {
+    alert('THEMES DEBUG:: loadThemes, source = ' + source.toString());
+    return;
+  }
+
+  // Get colors
+  ourColor = rgbToHex(swatches[0].style.backgroundColor);
+  theirColor = rgbToHex(swatches[1].style.backgroundColor);
+  backgroundColor = rgbToHex(swatches[2].style.backgroundColor);
+  ourTextColor = rgbToHex(swatches[3].style.backgroundColor);
+  theirTextColor = rgbToHex(swatches[4].style.backgroundColor);
+
+  // Send message
+  chrome.tabs.query({active: true, currentWindow: true},
+    function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {
+        ourColor,
+        theirColor,
+        backgroundColor,
+        ourTextColor,
+        theirTextColor
+      });
+    }
+  )
+
+  // Update popup and storage
+  fetchColorsAndFillPopup([
+    ourColor,
+    theirColor,
+    backgroundColor,
+    ourTextColor,
+    theirTextColor
+  ]);
+
+  store([
+    ourColor,
+    theirColor,
+    backgroundColor,
+    ourTextColor,
+    theirTextColor
+  ]);
 }
 
 function rgbToHex(rgb) {
