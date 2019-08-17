@@ -64,6 +64,9 @@ for (let li = 0; li < lis.length; li++) {
   lis[li].addEventListener('click', loadTheme);
 }
 
+// Function loadTheme
+// Set the theme chosen by the user from the saved themes list
+//  onto Messenger and save it as the current theme in storage
 function loadTheme(e) {
   let source = e.srcElement;
   let swatches;
@@ -73,7 +76,15 @@ function loadTheme(e) {
     swatches = source.parentElement.children;
   }
   else if (source.toString().includes('HTMLLIElement')) {
-    swatches = source.children[0].children;
+    swatches = source.children[2].children;
+  }
+  else if (source.toString().includes('HTMLSpanElement')) {
+    // Delete was clicked
+    // https://www.w3schools.com/jsref/met_win_confirm.asp
+    if (confirm('Delete this theme?')) {
+      source.parentElement.remove();
+      // todo remove from storage
+    }
   }
   else {
     alert('THEMES DEBUG:: loadThemes, source = ' + source.toString());
@@ -200,7 +211,7 @@ function saveClicked() {
   // √ Save to storage
   // store();
 
-  // o Build TheMe UI element
+  // √ Build TheMe UI element
   addTheMe();
 }
 
@@ -221,15 +232,23 @@ function addTheMe() {
 
   // Append text to li so we can show the text
   li.appendChild(t);
+  li.appendChild(br);
+
+  // Thank you,
+  // https://github.com/mrvivacious/PorNo-_public/blob/master/linkManager.js#L191
+  let span = document.createElement("SPAN");
+  let txt = document.createTextNode("\u00D7");
+  span.className = "delete";
+  span.appendChild(txt);
+  li.appendChild(span);
 
   // Append the color palette to the li
   buildColorPalette(li);
 
+  li.appendChild(br);
+
   // Add to TheMe list
   document.getElementById('themeList').appendChild(li);
-  document.getElementById('themeList').appendChild(br);
-  document.getElementById('themeList').appendChild(br);
-
 
   // Clear input field
   document.getElementById('INPUT_name').value = '';

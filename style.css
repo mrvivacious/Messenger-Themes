@@ -60,6 +60,19 @@ input:checked+.slider:before {
 /* ************* */
 
 /* Thank you, */
+/* https://github.com/mrvivacious/PorNo-_public/blob/master/popup.html#L125 */
+/* Style the close button */
+.delete {
+  position: relative;
+  float: right;
+  color: #f44336;
+}
+
+.delete:hover {
+  color: white;
+}
+
+/* Thank you, */
 /* https://github.com/mrvivacious/PorNo-_public/blob/master/popup.html#L168 */
 /* Style the input */
 .input_text {
