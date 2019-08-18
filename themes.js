@@ -102,7 +102,7 @@ function getColorsFromStorage() {
     BACKGROUND_COLOR = theMe[2];
     OUR_TEXT_COLOR = theMe[3];
     THEIR_TEXT_COLOR = theMe[4];
-    
+
     META_TEXT_COLOR = colorIsLight(hexToRGB(BACKGROUND_COLOR));
 
     recolor();
@@ -764,10 +764,15 @@ function recolorMisc() {
 }
 
 function recolorMeta() {
+  // Add if conditionals to ensure existence of bullshit
   // Recolor chat title
+  let chatTitle = '_17w2 _6ybr';
+  document.getElementsByClassName(chatTitle)[0].children[0].style.color = META_TEXT_COLOR;
   // Time ago
+
   // Type a message input text
-  document.getElementsByClassName('_1mf _1mj')[0].children[0].children[0].style.color = META_TEXT_COLOR;
+  let inputBoxText = '_1mf _1mj';
+  document.getElementsByClassName(inputBoxText)[0].children[0].children[0].style.color = META_TEXT_COLOR;
   // Left side names
   // Left side timestamps
   // You replied to
