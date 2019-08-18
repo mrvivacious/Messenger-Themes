@@ -51,9 +51,11 @@ let OUR_COLOR = '#FF94F0';
 let THEIR_COLOR = '#FFCEE3';
 let BACKGROUND_COLOR = '#624b5c';
 
-// text colourS todo
+
 let OUR_TEXT_COLOR = '#FFFFFF';
 let THEIR_TEXT_COLOR = '#000000';
+
+let META_TEXT_COLOR = '#000000';
 
 // O(n) for the elements, which is fine
 
@@ -100,6 +102,8 @@ function getColorsFromStorage() {
     BACKGROUND_COLOR = theMe[2];
     OUR_TEXT_COLOR = theMe[3];
     THEIR_TEXT_COLOR = theMe[4];
+    
+    META_TEXT_COLOR = colorIsLight(hexToRGB(BACKGROUND_COLOR));
 
     recolor();
   });
@@ -759,6 +763,100 @@ function recolorMisc() {
   }
 }
 
+function recolorMeta() {
+  // Recolor chat title
+  // Time ago
+  // Type a message input text
+  document.getElementsByClassName('_1mf _1mj')[0].children[0].children[0].style.color = META_TEXT_COLOR;
+  // Left side names
+  // Left side timestamps
+  // You replied to
+}
+
+
+// Thank you,
+// jscolor.js line 1271
+function colorIsLight(rgb) {
+  let r = rgb[0];
+  let g = rgb[1];
+  let b = rgb[2];
+  let sum = (.213 * r) + (.715 * g) + (.072 * b);
+
+  // True, color is light, use dark text
+  if (sum > (255 / 2)) {
+    return '#000000';
+  }
+
+  // Color is dark, use light text
+  return '#FFFFFF';
+}
+
+function hexToRGB(hex) {
+  // Convert to RGB
+  let red = hex.substring(1, 3);
+  let green = hex.substring(3, 5);
+  let blue = hex.substring(5, 7);
+
+  let redFirstNumber = red[0];
+  let redSecondNumber = red[1];
+
+  let greenFirstNumber = green[0];
+  let greenSecondNumber = green[1];
+
+  let blueFirstNumber = blue[0];
+  let blueSecondNumber = blue[1];
+
+  // Convert letters into numerical values
+  // Smh
+  if (redFirstNumber === 'A') {  redFirstNumber = 10;  }
+  else if (redFirstNumber === 'B') {  redFirstNumber = 11;  }
+  else if (redFirstNumber === 'C') {  redFirstNumber = 12;  }
+  else if (redFirstNumber === 'D') {  redFirstNumber = 13;  }
+  else if (redFirstNumber === 'E') {  redFirstNumber = 14;  }
+  else if (redFirstNumber === 'F') {  redFirstNumber = 15;  }
+
+  if (redSecondNumber === 'A') {  redSecondNumber = 10;  }
+  else if (redSecondNumber === 'B') {  redSecondNumber = 11;  }
+  else if (redSecondNumber === 'C') {  redSecondNumber = 12;  }
+  else if (redSecondNumber === 'D') {  redSecondNumber = 13;  }
+  else if (redSecondNumber === 'E') {  redSecondNumber = 14;  }
+  else if (redSecondNumber === 'F') {  redSecondNumber = 15;  }
+
+  if (greenFirstNumber === 'A') {  greenFirstNumber = 10;  }
+  else if (greenFirstNumber === 'B') {  greenFirstNumber = 11;  }
+  else if (greenFirstNumber === 'C') {  greenFirstNumber = 12;  }
+  else if (greenFirstNumber === 'D') {  greenFirstNumber = 13;  }
+  else if (greenFirstNumber === 'E') {  greenFirstNumber = 14;  }
+  else if (greenFirstNumber === 'F') {  greenFirstNumber = 15;  }
+
+  if (greenSecondNumber === 'A') {  greenSecondNumber = 10;  }
+  else if (greenSecondNumber === 'B') {  greenSecondNumber = 11;  }
+  else if (greenSecondNumber === 'C') {  greenSecondNumber = 12;  }
+  else if (greenSecondNumber === 'D') {  greenSecondNumber = 13;  }
+  else if (greenSecondNumber === 'E') {  greenSecondNumber = 14;  }
+  else if (greenSecondNumber === 'F') {  greenSecondNumber = 15;  }
+
+  if (blueFirstNumber === 'A') {  blueFirstNumber = 10;  }
+  else if (blueFirstNumber === 'B') {  blueFirstNumber = 11;  }
+  else if (blueFirstNumber === 'C') {  blueFirstNumber = 12;  }
+  else if (blueFirstNumber === 'D') {  blueFirstNumber = 13;  }
+  else if (blueFirstNumber === 'E') {  blueFirstNumber = 14;  }
+  else if (blueFirstNumber === 'F') {  blueFirstNumber = 15;  }
+
+  if (blueSecondNumber === 'A') {  blueSecondNumber = 10;  }
+  else if (blueSecondNumber === 'B') {  blueSecondNumber = 11;  }
+  else if (blueSecondNumber === 'C') {  blueSecondNumber = 12;  }
+  else if (blueSecondNumber === 'D') {  blueSecondNumber = 13;  }
+  else if (blueSecondNumber === 'E') {  blueSecondNumber = 14;  }
+  else if (blueSecondNumber === 'F') {  blueSecondNumber = 15;  }
+
+  red = (redFirstNumber * 16) + parseInt(redSecondNumber);
+  green = (greenFirstNumber * 16) + parseInt(greenSecondNumber);
+  blue = (blueFirstNumber * 16) + parseInt(blueSecondNumber);
+
+  return [red, green, blue];
+}
+
 function recolor(ourColor, theirColor, backgroundColor, ourTextColor, theirTextColor) {
   if (ourColor && theirColor && backgroundColor && ourTextColor && theirTextColor) {
     OUR_COLOR = ourColor;
@@ -766,6 +864,8 @@ function recolor(ourColor, theirColor, backgroundColor, ourTextColor, theirTextC
     BACKGROUND_COLOR = backgroundColor;
     OUR_TEXT_COLOR = ourTextColor;
     THEIR_TEXT_COLOR = theirTextColor;
+
+    META_TEXT_COLOR = colorIsLight(hexToRGB(backgroundColor));
     // alert(`${ourColor}, ${theirColor}, ${backgroundColor}`);
   }
 
@@ -774,6 +874,8 @@ function recolor(ourColor, theirColor, backgroundColor, ourTextColor, theirTextC
   recolorMessages();
 
   recolorMisc();
+
+  recolorMeta();
 
   recolorSVG();
 
