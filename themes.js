@@ -764,20 +764,65 @@ function recolorMisc() {
 }
 
 function recolorMeta() {
-  // Add if conditionals to ensure existence of bullshit
+  // TODO Add if conditionals to ensure existence of bullshit
   // Recolor chat title
   let chatTitle = '_17w2 _6ybr';
   document.getElementsByClassName(chatTitle)[0].children[0].style.color = META_TEXT_COLOR;
-  // Time ago
 
+  // Time ago
+  let timeSinceLastActive = '_2v6o';
+  if (document.getElementsByClassName(timeSinceLastActive)[0]) {
+    document.getElementsByClassName(timeSinceLastActive)[0].style.color = META_TEXT_COLOR;
+  }
   // Type a message input text
   let inputBoxText = '_1mf _1mj';
-  document.getElementsByClassName(inputBoxText)[0].children[0].children[0].style.color = META_TEXT_COLOR;
-  // Left side names
-  // Left side timestamps
-  // You replied to
-}
+  // Group chat
+  if (document.getElementsByClassName(inputBoxText)[1]) {
+    document.getElementsByClassName(inputBoxText)[1].children[0].children[0].style.color = META_TEXT_COLOR;
+  }
+  // Direct msg
+  else {
+    document.getElementsByClassName(inputBoxText)[0].children[0].children[0].style.color = META_TEXT_COLOR;
+  }
 
+  // Person replied to
+  let repliedTo = '_3058 _4k7a _3-9b direction_ltr';
+  let repliedToPrompts = document.getElementsByClassName(repliedTo);
+
+  for (let prompt = 0; repliedToPrompts[prompt]; prompt++) {
+    repliedToPrompts[prompt].style.color = META_TEXT_COLOR;
+  }
+
+  // Left side names
+  let namesClassName = '_1ht6 _7st9';
+  let chatLogNames = document.getElementsByClassName(namesClassName);
+
+  for (let i = 0; chatLogNames[i]; i++) {
+    let name = chatLogNames[i];
+
+    // If a nickname / title has been assigned, there will be a child element
+    // Essentially, grab the innermost child and recolor that text
+    if (name.children[0]) {
+      name.children[0].style.color = META_TEXT_COLOR;
+    }
+    else {
+      name.style.color = META_TEXT_COLOR;
+    }
+  }
+
+  // Left side timestamps
+  let chatMeta = document.getElementsByClassName('_1qt5 _6zkd _5l-3');
+
+  for (let i = 0; chatMeta[i]; i++) {
+    // Preview of most recent message
+    chatMeta[i].children[0].style.color = META_TEXT_COLOR;
+
+    // Timestamp
+    chatMeta[i].children[2].style.color = META_TEXT_COLOR;
+  }
+
+
+}
 
 // Thank you,
 // jscolor.js line 1271
