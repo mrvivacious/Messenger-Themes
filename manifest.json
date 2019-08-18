@@ -3,7 +3,7 @@
 
   "name": "TheMes: Themes for Messenger",
   "description": "Saving your eyes",
-  "version": "0.0.1.0",
+  "version": "0.0.1.1",
   "author": "Linus Zhu and Vivek Bhookya",
 
   "browser_action": {
