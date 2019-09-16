@@ -3,7 +3,7 @@
 
   "name": "TheMes: Themes for Messenger",
   "description": "Saving your eyes",
-  "version": "0.0.1.1",
+  "version": "0.0.1.2",
   "author": "Linus Zhu and Vivek Bhookya",
 
   "browser_action": {
@@ -18,7 +18,7 @@
 
   "content_scripts": [
     {
-      "matches": ["https://*.facebook.com/*", "https://*.messenger.com/*"],
+      "matches": ["https://*.facebook.com/messages/*", "https://*.messenger.com/*"],
       "js": ["themes.js", "jscolor.js"],
       "run_at": "document_start"
     }
