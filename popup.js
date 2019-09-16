@@ -237,7 +237,8 @@ function addTheMe() {
   // Thank you,
   // https://github.com/mrvivacious/PorNo-_public/blob/master/linkManager.js#L191
   let span = document.createElement("SPAN");
-  let txt = document.createTextNode("\u00D7");
+  // let txt = document.createTextNode("\u00D7");
+  let txt = document.createTextNode("x");
   span.className = "delete";
   span.appendChild(txt);
   li.appendChild(span);
@@ -246,6 +247,9 @@ function addTheMe() {
   buildColorPalette(li);
 
   li.appendChild(br);
+
+  // Add the event listener to support delete functionality
+  li.addEventListener('click', loadTheme)
 
   // Add to TheMe list
   document.getElementById('themeList').appendChild(li);
