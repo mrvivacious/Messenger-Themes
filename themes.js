@@ -8,13 +8,12 @@
 // o Users add custom theme profiles
 // o Storage for the theme profiles
 // o Support for editing and deleting profiles
-// o Option to recolor the info text on the site (ie. cannot read when background is black)
 // o Add links to GitHub, source code, etc
-// Recolor based on user input events instead of a time interval cuz
+// o Recolor based on user input events instead of a time interval cuz
 //  this will feel more responsive and avoids "non colored"-down time
-// URL itself inside message (no priority)
+// o URL itself inside message (no priority)
 
-// step 1
+// Step 1
 // grab the classes of Messenger's text and misc elements
 // CLASSES
 // Messages
@@ -87,7 +86,8 @@ let META_TEXT_COLOR = '#000000';
 // onMessageSendOrReceive, recolorMessages
 // etc.
 
-// window.onload = () => {
+
+// window.onload = () => {// Silence fucking errors
   getColorsFromStorage();
   chrome.runtime.onMessage.addListener(acceptExtensionMessage);
   setInterval(recolor, 300);
@@ -552,7 +552,9 @@ function recolorBottomSVG() {
         // Camera | Gamepad | Microphone | File upload icon
         case 2: case 3: case 5: case 9:
           currentSVG = currentSVG.children[0].children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          if (currentSVG) {
+            currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+          }
           break;
 
         // Special double-child SVG case lmao
@@ -601,7 +603,9 @@ function recolorBottomSVG() {
         // rgba handling
         // The plus icon on the bottom left [that toggles the other buttons]
         case 5:
-          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+          if (currentSVG.children[0].children[1]) {
+            currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+          }
           break;
 
         // 1 level
@@ -767,7 +771,9 @@ function recolorMeta() {
   // TODO Add if conditionals to ensure existence of bullshit
   // Recolor chat title
   let chatTitle = '_17w2 _6ybr';
-  document.getElementsByClassName(chatTitle)[0].children[0].style.color = META_TEXT_COLOR;
+  if (document.getElementsByClassName(chatTitle)[0]) {
+    document.getElementsByClassName(chatTitle)[0].children[0].style.color = META_TEXT_COLOR;
+  }
 
   // Time ago
   let timeSinceLastActive = '_2v6o';
@@ -782,7 +788,9 @@ function recolorMeta() {
   }
   // Direct msg
   else {
-    document.getElementsByClassName(inputBoxText)[0].children[0].children[0].style.color = META_TEXT_COLOR;
+    if (document.getElementsByClassName(inputBoxText)[0]) {
+      document.getElementsByClassName(inputBoxText)[0].children[0].children[0].style.color = META_TEXT_COLOR;
+    }
   }
 
   // Person replied to
