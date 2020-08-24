@@ -50,7 +50,6 @@ let OUR_COLOR = '#FF94F0';
 let THEIR_COLOR = '#FFCEE3';
 let BACKGROUND_COLOR = '#624b5c';
 
-
 let OUR_TEXT_COLOR = '#FFFFFF';
 let THEIR_TEXT_COLOR = '#000000';
 
@@ -85,7 +84,6 @@ let META_TEXT_COLOR = '#000000';
 // onConversationChange, recolorBackground
 // onMessageSendOrReceive, recolorMessages
 // etc.
-
 
 // window.onload = () => {// Silence fucking errors
   getColorsFromStorage();

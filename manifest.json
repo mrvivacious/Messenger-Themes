@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "TheMes: Themes for Messenger",
+  "name": "DEV TheMes: Themes for Messenger",
   "description": "Saving your eyes",
   "version": "0.0.1.2",
   "author": "Linus Zhu and Vivek Bhookya",
@@ -11,16 +11,11 @@
     "default_title": "TheMes"
   },
 
-  "background": {
-      "scripts": ["themes.js"],
-      "persistent": false
-      },
-
   "content_scripts": [
     {
       "matches": ["https://*.facebook.com/messages/*", "https://*.messenger.com/*"],
-      "js": ["themes.js", "jscolor.js"],
-      "run_at": "document_start"
+      "js": ["themes2.js", "jscolor.js"],
+      "run_at": "document_end"
     }
   ],
 
