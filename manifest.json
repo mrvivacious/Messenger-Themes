@@ -14,7 +14,7 @@
   "content_scripts": [
     {
       "matches": ["https://*.facebook.com/messages/*", "https://*.messenger.com/*"],
-      "js": ["themes2.js", "jscolor.js"],
+      "js": ["MessengerObservers.js", "jscolor.js"],
       "run_at": "document_end"
     }
   ],
