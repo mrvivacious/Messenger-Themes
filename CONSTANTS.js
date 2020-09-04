@@ -30,6 +30,8 @@ const POPUP_MEDIA_PANEL = '_7mkk _7t1o _7t0e';
 const PAPER_AIRPLANE = '_30yy _38lh _7kpi';
 const SMILEY_FACE = '_30yy _7odb';
 
+const REPLIES = '_3egs';
+
 // COLORS
 let OUR_COLOR = '#FF94F0';
 let THEIR_COLOR = '#FFCEE3';

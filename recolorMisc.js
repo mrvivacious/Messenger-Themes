@@ -5,14 +5,10 @@ function recolorMisc() {
   let paperAirplaneWhileTypingMessage = document.getElementsByClassName(PAPER_AIRPLANE)[0];
   let smileyFaceInsideChatInput = document.getElementsByClassName(SMILEY_FACE)[0];
 
+  let replies = document.getElementsByClassName(REPLIES);
+
   if (typingIndicator) {
     typingIndicator.style.backgroundColor = BACKGROUND_COLOR;
-  }
-
-  if (messageStatusIndicator) {
-    for (let msg = 0; messageStatusIndicator[msg]; msg++) {
-      messageStatusIndicator[msg].style.color = OUR_COLOR;
-    }
   }
 
   if (popupMediaPanel) {
@@ -27,6 +23,18 @@ function recolorMisc() {
   if (smileyFaceInsideChatInput) {
     smileyFaceInsideChatInput = smileyFaceInsideChatInput.children[0];
     smileyFaceInsideChatInput.outerHTML = recoloredSVG(smileyFaceInsideChatInput.outerHTML);
+  }
+
+  if (messageStatusIndicator) {
+    for (let msg = 0; messageStatusIndicator[msg]; msg++) {
+      messageStatusIndicator[msg].style.color = OUR_COLOR;
+    }
+  }
+
+  if (replies) {
+    for (let reply = 0; replies[reply]; reply++) {
+      replies[reply].style.backgroundColor = BACKGROUND_COLOR;
+    }
   }
 }
 
