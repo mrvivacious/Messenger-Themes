@@ -1,3 +1,10 @@
+function initialColor() {
+  recolorMessages();
+  recolorBackground();
+  recolorSVG();
+  
+}
+
 // When conversation changes, refresh the message observer to
 //  re-enable message coloring
 // Thank you, https://stackoverflow.com/questions/3522090/event-when-window-location-href-changes
@@ -13,6 +20,7 @@ function addObserverForURLChange() {
           oldHref = document.location.href;
 
           // Add chat event listener
+          console.log('recoloring -----')
           addObserverForMessage();
         }
       });
@@ -38,7 +46,7 @@ function addObserverForMessage() {
     // https://stackoverflow.com/questions/40398054/observe-on-mutationobserver-parameter-1-is-not-of-type-node
     //The node we need does not exist yet.
     //Wait 500ms and try again
-    window.setTimeout(addObserverForMessage,500);
+    window.setTimeout(addObserverForMessage,100);
     console.log('Waiting...');
     return;
   }
@@ -48,12 +56,14 @@ function addObserverForMessage() {
     mutations.forEach(function(mutation) {
       // RECOLOR MESSAGES HERE
       console.log('New message loaded: ' + mutation)
+      recolorMessages();
     });
   });
 
   // pass in the target node, as well as the observer options
   observer.observe(messagesPanel, config);
-  console.log('Added message observer')
+  console.log('Added message observer');
+  initialColor();
 }
 
 addObserverForURLChange();
