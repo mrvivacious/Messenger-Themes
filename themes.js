@@ -34,6 +34,7 @@ const BACKGROUND_PANEL_TOP = '_673w';
 const BACKGROUND_PANEL_LEFT = '_1enh';
 const BACKGROUND_PANEL_CHAT = '_5irm';
 const BACKGROUND_PANEL_DIVIDER = '_4sp8';
+const BACKGROUND_PANEL_BOTTOM = '_4rv3 _7og6';
 
 // Misc
 // POPUP_MEDIA_PANEL: When the Messenger window is
@@ -88,7 +89,7 @@ let META_TEXT_COLOR = '#000000';
 // window.onload = () => {// Silence fucking errors
   getColorsFromStorage();
   chrome.runtime.onMessage.addListener(acceptExtensionMessage);
-  setInterval(recolor, 300);
+  setInterval(recolor, 800);
 // }
 
 function getColorsFromStorage() {
@@ -118,28 +119,20 @@ function acceptExtensionMessage(request, sender, sendResponse) {
 }
 
 function recolorBackground() {
-  // Recolor the background
-  let backgroundTop = document.getElementsByClassName(BACKGROUND_PANEL_TOP)[0];
-  let backgroundLeft = document.getElementsByClassName(BACKGROUND_PANEL_LEFT)[0];
-  let backgroundChat = document.getElementsByClassName(BACKGROUND_PANEL_CHAT)[0];
-  let backgroundDivider = document.getElementsByClassName(BACKGROUND_PANEL_DIVIDER)[0];
+  let backgroundPanels = [
+    BACKGROUND_PANEL_TOP,
+    BACKGROUND_PANEL_LEFT,
+    BACKGROUND_PANEL_CHAT,
+    BACKGROUND_PANEL_DIVIDER,
+    BACKGROUND_PANEL_BOTTOM
+  ];
 
-  // Silence console warnings by only recoloring if the item
-  //  was successfully found
-  if (backgroundTop) {
-    backgroundTop.style.backgroundColor = BACKGROUND_COLOR;
-  }
+  for (let i = 0; backgroundPanels[i]; i++) {
+    let panel = document.getElementsByClassName(backgroundPanels[i])[0];
 
-  if (backgroundLeft) {
-    backgroundLeft.style.backgroundColor = BACKGROUND_COLOR;
-  }
-
-  if (backgroundChat) {
-    backgroundChat.style.backgroundColor = BACKGROUND_COLOR;
-  }
-
-  if (backgroundDivider) {
-    backgroundDivider.style.backgroundColor = BACKGROUND_COLOR;
+    if (panel) {
+      panel.style.backgroundColor = BACKGROUND_COLOR;
+    }
   }
 }
 
