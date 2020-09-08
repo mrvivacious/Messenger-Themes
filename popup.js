@@ -131,7 +131,7 @@ function loadTheme(e) {
 
 // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
 function componentToHex(c) {
-  var hex = c.toString(16);
+  let hex = parseInt(c).toString(16);
   return hex.length == 1 ? "0" + hex : hex;
 }
 
@@ -142,7 +142,7 @@ function rgbToHex(rgb) {
   let r = colors[0];
   let g = colors[1];
   let b = colors[2];
-  
+
   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
