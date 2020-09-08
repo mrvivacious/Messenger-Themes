@@ -129,6 +129,12 @@ function loadTheme(e) {
   ]);
 }
 
+// https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
 function rgbToHex(rgb) {
   // Get the RGB values
   let colors = rgb.split('(')[1].split(')')[0].split(', ');
@@ -136,42 +142,8 @@ function rgbToHex(rgb) {
   let r = colors[0];
   let g = colors[1];
   let b = colors[2];
-
-  // Convert each value into hex code in the jankiest way possible
-  let redFirstNumber = parseInt(r / 16).toString();
-  let greenFirstNumber = parseInt(g / 16).toString();
-  let blueFirstNumber = parseInt(b / 16).toString();
-
-  // Ligmao ripppppppppppppppppp
-  redFirstNumber = redFirstNumber.replace('10','A').replace('11','B').replace('12','C');
-  redFirstNumber = redFirstNumber.replace('13','D').replace('14','E').replace('15','F');
-
-  blueFirstNumber = blueFirstNumber.replace('10','A').replace('11','B').replace('12','C');
-  blueFirstNumber = blueFirstNumber.replace('13','D').replace('14','E').replace('15','F');
-
-  greenFirstNumber = greenFirstNumber.replace('10','A').replace('11','B').replace('12','C');
-  greenFirstNumber = greenFirstNumber.replace('13','D').replace('14','E').replace('15','F');
-
-  // Second value
-  let redSecondNumber = (r % 16).toString();
-  let greenSecondNumber = (g % 16).toString();
-  let blueSecondNumber = (b % 16).toString();
-
-  // Hehehehehehehehhehehehhe
-  redSecondNumber = redSecondNumber.replace('10','A').replace('11','B').replace('12','C');
-  redSecondNumber = redSecondNumber.replace('13','D').replace('14','E').replace('15','F');
-
-  blueSecondNumber = blueSecondNumber.replace('10','A').replace('11','B').replace('12','C');
-  blueSecondNumber = blueSecondNumber.replace('13','D').replace('14','E').replace('15','F');
-
-  greenSecondNumber = greenSecondNumber.replace('10','A').replace('11','B').replace('12','C');
-  greenSecondNumber = greenSecondNumber.replace('13','D').replace('14','E').replace('15','F');
-
-  let red = redFirstNumber + '' + redSecondNumber;
-  let green = greenFirstNumber + greenSecondNumber;
-  let blue = blueFirstNumber + blueSecondNumber;
-
-  return '#' + red + green + blue;
+  
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
 // Function previewCurrentColors

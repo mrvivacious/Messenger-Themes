@@ -688,68 +688,13 @@ function colorIsLight(rgb) {
 
 function hexToRGB(hex) {
   // Convert to RGB
-  let red = hex.substring(1, 3);
-  let green = hex.substring(3, 5);
-  let blue = hex.substring(5, 7);
-
-  let redFirstNumber = red[0];
-  let redSecondNumber = red[1];
-
-  let greenFirstNumber = green[0];
-  let greenSecondNumber = green[1];
-
-  let blueFirstNumber = blue[0];
-  let blueSecondNumber = blue[1];
-
-  // Convert letters into numerical values
-  // Smh
-  if (redFirstNumber === 'A') {  redFirstNumber = 10;  }
-  else if (redFirstNumber === 'B') {  redFirstNumber = 11;  }
-  else if (redFirstNumber === 'C') {  redFirstNumber = 12;  }
-  else if (redFirstNumber === 'D') {  redFirstNumber = 13;  }
-  else if (redFirstNumber === 'E') {  redFirstNumber = 14;  }
-  else if (redFirstNumber === 'F') {  redFirstNumber = 15;  }
-
-  if (redSecondNumber === 'A') {  redSecondNumber = 10;  }
-  else if (redSecondNumber === 'B') {  redSecondNumber = 11;  }
-  else if (redSecondNumber === 'C') {  redSecondNumber = 12;  }
-  else if (redSecondNumber === 'D') {  redSecondNumber = 13;  }
-  else if (redSecondNumber === 'E') {  redSecondNumber = 14;  }
-  else if (redSecondNumber === 'F') {  redSecondNumber = 15;  }
-
-  if (greenFirstNumber === 'A') {  greenFirstNumber = 10;  }
-  else if (greenFirstNumber === 'B') {  greenFirstNumber = 11;  }
-  else if (greenFirstNumber === 'C') {  greenFirstNumber = 12;  }
-  else if (greenFirstNumber === 'D') {  greenFirstNumber = 13;  }
-  else if (greenFirstNumber === 'E') {  greenFirstNumber = 14;  }
-  else if (greenFirstNumber === 'F') {  greenFirstNumber = 15;  }
-
-  if (greenSecondNumber === 'A') {  greenSecondNumber = 10;  }
-  else if (greenSecondNumber === 'B') {  greenSecondNumber = 11;  }
-  else if (greenSecondNumber === 'C') {  greenSecondNumber = 12;  }
-  else if (greenSecondNumber === 'D') {  greenSecondNumber = 13;  }
-  else if (greenSecondNumber === 'E') {  greenSecondNumber = 14;  }
-  else if (greenSecondNumber === 'F') {  greenSecondNumber = 15;  }
-
-  if (blueFirstNumber === 'A') {  blueFirstNumber = 10;  }
-  else if (blueFirstNumber === 'B') {  blueFirstNumber = 11;  }
-  else if (blueFirstNumber === 'C') {  blueFirstNumber = 12;  }
-  else if (blueFirstNumber === 'D') {  blueFirstNumber = 13;  }
-  else if (blueFirstNumber === 'E') {  blueFirstNumber = 14;  }
-  else if (blueFirstNumber === 'F') {  blueFirstNumber = 15;  }
-
-  if (blueSecondNumber === 'A') {  blueSecondNumber = 10;  }
-  else if (blueSecondNumber === 'B') {  blueSecondNumber = 11;  }
-  else if (blueSecondNumber === 'C') {  blueSecondNumber = 12;  }
-  else if (blueSecondNumber === 'D') {  blueSecondNumber = 13;  }
-  else if (blueSecondNumber === 'E') {  blueSecondNumber = 14;  }
-  else if (blueSecondNumber === 'F') {  blueSecondNumber = 15;  }
-
-  red = (redFirstNumber * 16) + parseInt(redSecondNumber);
-  green = (greenFirstNumber * 16) + parseInt(greenSecondNumber);
-  blue = (blueFirstNumber * 16) + parseInt(blueSecondNumber);
-
-  return [red, green, blue];
+  // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? [
+    parseInt(result[1], 16),
+    parseInt(result[2], 16),
+    parseInt(result[3], 16)
+  ] : null;
 }
 
 function recolor(ourColor, theirColor, backgroundColor, ourTextColor, theirTextColor) {
