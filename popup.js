@@ -19,7 +19,54 @@ const inputIDs = [
   'theirTextColor'
 ];
 
+fetchThemesAndFillPopup();
 fetchColorsAndFillPopup();
+
+function fetchThemesAndFillPopup() {
+  chrome.storage.sync.get(null, function(themes) {
+    let names = Object.keys(themes);
+    if (names[0]) {
+      for (let i = 0; names[i]; i++) {
+        if (names[i] !== 'colors') {
+          initList(names[i]);
+        }
+      }
+    }
+  });
+}
+
+function initList(themeName) {
+  // Retrieve the value associated with the current key
+ chrome.storage.sync.get(themeName, function(returnValue) {
+     if (returnValue[themeName]) {
+       let colors = returnValue[themeName][0];
+
+       let br = document.createElement('br');
+       let li = document.createElement('li');
+       let t = document.createTextNode(themeName);
+
+       li.appendChild(t);
+       li.appendChild(br);
+
+       let span = document.createElement("SPAN");
+
+       let txt = document.createTextNode("x");
+       span.className = "delete";
+       span.appendChild(txt);
+       li.appendChild(span);
+
+       // Append the color palette to the li
+       li.appendChild(buildColorPalette(colors));
+       li.appendChild(br);
+
+       // Add the event listener to support delete functionality
+       li.addEventListener('click', clickHandler)
+
+       // Add to TheMe list
+       document.getElementById('themeList').appendChild(li);
+     }
+   });
+}
 
 // Function fetchColorsAndFillPopup
 function fetchColorsAndFillPopup(themeFromMenu) {
@@ -78,15 +125,18 @@ function clickHandler(e) {
   else if (source.toString().includes('HTMLLIElement')) {
     swatches = source.children[2].children;
   }
-  else if (source.toString().includes('HTMLSpanElement')) {
+  else if (source.innerText === 'x') {
     // Delete was clicked
     // https://www.w3schools.com/jsref/met_win_confirm.asp
     if (confirm('Delete this theme?')) {
       deleteTheme(source);
     }
   }
+  else if (source.toString().includes('HTMLSpanElement')) {
+    swatches = source.parentElement.children;
+  }
   else {
-    alert('THEMES DEBUG:: clickHandler, source = ' + source.toString());
+    alert('THEMES DEBUG:: clickHandler, source x= ' + source.toString());
     return;
   }
 
@@ -218,7 +268,7 @@ function addTheMe() {
   li.appendChild(span);
 
   // Append the color palette to the li
-  li.appendChild(buildColorPalette());
+  li.appendChild(buildColorPalette(undefined));
   li.appendChild(br);
 
   // Add the event listener to support delete functionality
@@ -231,7 +281,16 @@ function addTheMe() {
   document.getElementById('INPUT_name').value = '';
 }
 
-function buildColorPalette() {
+function buildColorPalette(colors) {
+  if (colors) {
+    // alert(colors[0])
+    ourColor = colors[0];
+    theirColor = colors[1];
+    backgroundColor = colors[2];
+    ourTextColor = colors[3];
+    theirTextColor = colors[4];
+  }
+
   // We already have the colors from the member variables at the top of the file
   // Build the freaking css and add the classes
   let div = document.createElement('div');
@@ -283,6 +342,21 @@ function store(themeFromMenu) {
       // https://github.com/mrvivacious/ahegao/blob/master/popupFunctions.js#L45
       chrome.storage.sync.set({[name]:[colors]}, function() {
         // Any code to run after saving
+        // Send message
+        chrome.tabs.query({active: true, currentWindow: true},
+          function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+              ourColor,
+              theirColor,
+              backgroundColor,
+              ourTextColor,
+              theirTextColor
+            });
+          }
+        );
+
+        chrome.storage.sync.set({colors:[colors]}, function() {});
+
       });
     }
   }
@@ -306,6 +380,6 @@ function store(themeFromMenu) {
           theirTextColor
         });
       }
-    )
+    );
   }
 }
