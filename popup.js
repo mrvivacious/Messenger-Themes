@@ -6,6 +6,11 @@
 // @author Vivek Bhookya (mrvivacious)
 // @author Linus Zhu (linuszhu1031)
 
+// What exactly needs to be done?
+// What is the format of our data? What format do we want it in?
+// Have we implemented create-read-delete for our data?
+// "Success for me looks like Freedom"
+
 const inputIDs = [
   'ourColor',
   'theirColor',
@@ -17,7 +22,6 @@ const inputIDs = [
 fetchColorsAndFillPopup();
 
 // Function fetchColorsAndFillPopup
-// Reads the saved colors from storage and populates the popup accordingly
 function fetchColorsAndFillPopup(themeFromMenu) {
   if (!themeFromMenu) {
     chrome.storage.sync.get('colors', function(colorsList) {
@@ -47,27 +51,23 @@ let ourTextColor = '#' + document.getElementById(inputIDs[3]).value;
 let theirTextColor = '#' + document.getElementById(inputIDs[4]).value;
 
 // Give save-to-storage functionality to the save button
-let button_save = document.getElementById('save');
-button_save.addEventListener('click', saveClicked);
+document.getElementById('save').addEventListener('click', saveClicked);
 
 // Add event listeners to all the inputs in the popup in order to enable
 //  "live coloring preview"
 let inputs = document.getElementsByTagName('input');
-let lis = document.getElementsByTagName('li');
 
 // ??? https://www.w3schools.com/jsref/event_onchange.asp
 for (let input = 0; input < inputs.length; input++) {
   inputs[input].addEventListener('change', previewCurrentColors);
 }
 
+let lis = document.getElementsByTagName('li');
 for (let li = 0; li < lis.length; li++) {
-  lis[li].addEventListener('click', loadTheme);
+  lis[li].addEventListener('click', clickHandler);
 }
 
-// Function loadTheme
-// Set the theme chosen by the user from the saved themes list
-//  onto Messenger and save it as the current theme in storage
-function loadTheme(e) {
+function clickHandler(e) {
   let source = e.srcElement;
   let swatches;
 
@@ -82,12 +82,11 @@ function loadTheme(e) {
     // Delete was clicked
     // https://www.w3schools.com/jsref/met_win_confirm.asp
     if (confirm('Delete this theme?')) {
-      source.parentElement.remove();
-      // todo remove from storage
+      deleteTheme(source);
     }
   }
   else {
-    alert('THEMES DEBUG:: loadThemes, source = ' + source.toString());
+    alert('THEMES DEBUG:: clickHandler, source = ' + source.toString());
     return;
   }
 
@@ -129,6 +128,15 @@ function loadTheme(e) {
   ]);
 }
 
+
+function deleteTheme(source) {
+  let themeToRemove = source.parentElement.innerText.split('\n')[0];
+
+  chrome.storage.sync.remove([themeToRemove], function() {
+    source.parentElement.remove();
+  });
+}
+
 // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
 function componentToHex(c) {
   let hex = parseInt(c).toString(16);
@@ -146,10 +154,6 @@ function rgbToHex(rgb) {
   return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
 
-// Function previewCurrentColors
-// Send a message from the popup to the window with the selected colorway
-//  so that the window can update the Messenger interface with the new colors
-//  for the user to preview
 function previewCurrentColors(event) {
   ourColor = '#' + document.getElementById(inputIDs[0]).value;
   theirColor = '#' + document.getElementById(inputIDs[1]).value;
@@ -160,9 +164,6 @@ function previewCurrentColors(event) {
   theirTextColor = '#' + document.getElementById(inputIDs[4]).value;
 
   // alert(yourBubbleColor);
-  // Get selected colors
-  // Send message to themes.js to start reloading the preview colors
-  //  instead of the current theme's colors
 
   // Thank you,
   // https://github.com/mrvivacious/ahegao/commit/0fbb0c7cd4c6d2630e028d9f08daa3ff55a5ecd7
@@ -180,11 +181,14 @@ function previewCurrentColors(event) {
 }
 
 function saveClicked() {
-  // √ Save to storage
-  // store();
+  // Global variables ftw?
+  if (ourColor.length > 1) {
+    // √ Save to storage
+    store();
 
-  // √ Build TheMe UI element
-  addTheMe();
+    // √ Build TheMe UI element
+    addTheMe();
+  }
 }
 
 function addTheMe() {
@@ -197,31 +201,28 @@ function addTheMe() {
   //   return;
   // }
 
-  // Make li and text objects
   let br = document.createElement('br');
   let li = document.createElement('li');
   let t = document.createTextNode(name);
 
-  // Append text to li so we can show the text
   li.appendChild(t);
   li.appendChild(br);
 
   // Thank you,
   // https://github.com/mrvivacious/PorNo-_public/blob/master/linkManager.js#L191
   let span = document.createElement("SPAN");
-  // let txt = document.createTextNode("\u00D7");
+
   let txt = document.createTextNode("x");
   span.className = "delete";
   span.appendChild(txt);
   li.appendChild(span);
 
   // Append the color palette to the li
-  buildColorPalette(li);
-
+  li.appendChild(buildColorPalette());
   li.appendChild(br);
 
   // Add the event listener to support delete functionality
-  li.addEventListener('click', loadTheme)
+  li.addEventListener('click', clickHandler)
 
   // Add to TheMe list
   document.getElementById('themeList').appendChild(li);
@@ -230,7 +231,7 @@ function addTheMe() {
   document.getElementById('INPUT_name').value = '';
 }
 
-function buildColorPalette(li) {
+function buildColorPalette() {
   // We already have the colors from the member variables at the top of the file
   // Build the freaking css and add the classes
   let div = document.createElement('div');
@@ -260,31 +261,11 @@ function buildColorPalette(li) {
   div.appendChild(fourth);
   div.appendChild(fifth);
 
-  // Append to li
-  li.appendChild(div);
+  return div;
 }
 
-// Function store
 // Store the user selected values into localStorage
 function store(themeFromMenu) {
-  // var inputOurColor = '#' + inputs[0];
-  // var inputTheirColor = '#' + inputs[1];
-  // var inputBackgroundColor = '#' + inputs[2];
-  //
-  // let inputOurTextColor = '#' + inputs[3];
-  // let inputTheirTextColor = '#' + inputs[4];
-
-  // DANGER
-  // Setting the KEY to a dynamic value (the colors are generated in the lines
-  //  right above) will make looking for them DIFFICULT because you need to search
-  //  by the COLOR instead of like "SAVED_OUR_COLOR"
-  // Use STRINGS for KEYS, dynamic values for VALUES
-  // localStorage.setItem(inpurOurColor, ourColor);
-  // localStorage.setItem(inputTheirColor, theirColor);
-  // localStorage.setItem(inputBackgroundColor, backgroundColor);
-  // localStorage.setItem(inputOurTextColor, inputOur);
-  // localStorage.setItem(inputTheirTextColor, backgroundColor);
-
   if (!themeFromMenu) {
     let colors = [
       ourColor,
@@ -294,14 +275,37 @@ function store(themeFromMenu) {
       theirTextColor
     ];
 
-    // Save to storage.sync
-    // Thank you,
-    // https://github.com/mrvivacious/ahegao/blob/master/popupFunctions.js#L45
-    chrome.storage.sync.set({colors:[colors]}, function() {
-      // Any code to run after saving
-    });
+    let name = document.getElementById('INPUT_name').value.trim();
+
+    if (name.length > 0) {
+      // Save to storage.sync
+      // Thank you,
+      // https://github.com/mrvivacious/ahegao/blob/master/popupFunctions.js#L45
+      chrome.storage.sync.set({[name]:[colors]}, function() {
+        // Any code to run after saving
+      });
+    }
   }
   else {
     chrome.storage.sync.set({colors:[themeFromMenu]}, function() {});
+
+    ourColor = themeFromMenu[0];
+    theirColor = themeFromMenu[1];
+    backgroundColor = themeFromMenu[2];
+    ourTextColor = themeFromMenu[3];
+    theirTextColor = themeFromMenu[4];
+
+    // Send message
+    chrome.tabs.query({active: true, currentWindow: true},
+      function(tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+          ourColor,
+          theirColor,
+          backgroundColor,
+          ourTextColor,
+          theirTextColor
+        });
+      }
+    )
   }
 }
