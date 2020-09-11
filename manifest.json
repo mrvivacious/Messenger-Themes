@@ -14,7 +14,7 @@
   "content_scripts": [
     {
       "matches": ["https://*.facebook.com/messages/*", "https://*.messenger.com/*"],
-      "js": ["CONSTANTS.js", "recolorBackground.js", "recolorMessages.js", "recolorMisc.js", "themes.js", "jscolor.js"],
+      "js": ["CONSTANTS.js", "recoloring/recolorBackground.js", "recoloring/recolorMessages.js", "recoloring/recolorMisc.js", "themes.js", "jscolor.js"],
       "run_at": "document_end"
     }
   ],
