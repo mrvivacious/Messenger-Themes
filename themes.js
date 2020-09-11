@@ -46,6 +46,15 @@
 // onMessageSendOrReceive, recolorMessages
 // etc.
 
+let OUR_COLOR = '';
+let THEIR_COLOR = '';
+let BACKGROUND_COLOR = '';
+
+let OUR_TEXT_COLOR = '';
+let THEIR_TEXT_COLOR = '';
+
+let META_TEXT_COLOR = '';
+
 // window.onload = () => {// Silence fucking errors
   getColorsFromStorage();
   chrome.runtime.onMessage.addListener(acceptExtensionMessage);
@@ -690,7 +699,7 @@ function hexToRGB(hex) {
   // Convert to RGB
   // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
   let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  
+
   return result ? [
     parseInt(result[1], 16),
     parseInt(result[2], 16),
