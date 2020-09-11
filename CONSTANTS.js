@@ -31,13 +31,3 @@ const PAPER_AIRPLANE = '_30yy _38lh _7kpi';
 const SMILEY_FACE = '_30yy _7odb';
 
 const REPLIES = '_3egs';
-
-// COLORS
-let OUR_COLOR = '#FF94F0';
-let THEIR_COLOR = '#FFCEE3';
-let BACKGROUND_COLOR = '#624b5c';
-
-let OUR_TEXT_COLOR = '#FFFFFF';
-let THEIR_TEXT_COLOR = '#000000';
-
-let META_TEXT_COLOR = '#000000';
