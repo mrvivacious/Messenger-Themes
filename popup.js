@@ -79,6 +79,7 @@ function fetchColorsAndFillPopup(themeFromMenu) {
         //  later in the code and using "##..." hexcode is a big bug
         document.getElementById(inputIDs[id]).value = theMe[id].replace('#', '');
         document.getElementById(inputIDs[id]).style.backgroundColor = theMe[id];
+        document.getElementById(inputIDs[id]).style.color = colorIsLight(hexToRGB(theMe[id]));
       }
     });
   }
@@ -86,8 +87,37 @@ function fetchColorsAndFillPopup(themeFromMenu) {
     for (let color = 0; themeFromMenu[color]; color++) {
       document.getElementById(inputIDs[color]).value = themeFromMenu[color].replace('#', '');
       document.getElementById(inputIDs[color]).style.backgroundColor = themeFromMenu[color];
+      document.getElementById(inputIDs[id]).style.color = colorIsLight(hexToRGB(theMe[id]));
     }
   }
+}
+
+// jscolor.js line 1271
+function colorIsLight(rgb) {
+  let r = rgb[0];
+  let g = rgb[1];
+  let b = rgb[2];
+  let sum = (.213 * r) + (.715 * g) + (.072 * b);
+
+  // True, color is light, use dark text
+  if (sum > (255 / 2)) {
+    return '#000000';
+  }
+
+  // Color is dark, use light text
+  return '#FFFFFF';
+}
+
+function hexToRGB(hex) {
+  // Convert to RGB
+  // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+  let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+  return result ? [
+    parseInt(result[1], 16),
+    parseInt(result[2], 16),
+    parseInt(result[3], 16)
+  ] : null;
 }
 
 // Save our stored colors for later use
