@@ -51,12 +51,12 @@
 }
 
 
-body {
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-  /* font-family: "Times New Roman", TimesNewRoman, sans-serif; */
+html {
+  /* font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif; */
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
   font-size: 14px;
   width: 500px;
-  background-color: white;
+  background-color: #FED3FF;
   /* height: 320px; */
 }
 
@@ -151,6 +151,7 @@ li:hover {
 
   border-radius: 40px 0px 0px 40px;
 
+  /* ty https://css-tricks.com/almanac/properties/b/border-radius/ */
   border-left: 1px solid black;
   /* border-right: 1px solid black; */
   border-top: 1px solid black;
