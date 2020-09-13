@@ -208,8 +208,6 @@ function previewCurrentColors(event) {
   ourColor = '#' + document.getElementById(inputIDs[0]).value;
   theirColor = '#' + document.getElementById(inputIDs[1]).value;
   backgroundColor = '#' + document.getElementById(inputIDs[2]).value;
-
-  // text color todo
   ourTextColor = '#' + document.getElementById(inputIDs[3]).value;
   theirTextColor = '#' + document.getElementById(inputIDs[4]).value;
 
@@ -245,11 +243,10 @@ function addTheMe() {
   // Get TheMe name from the input field
   let name = document.getElementById('INPUT_name').value.trim();
 
-  //todo uncomment
-  // if (!name.length) {
-  //   alert('add a name lmao');
-  //   return;
-  // }
+  if (!name.length) {
+    alert('Add a name to save this TheMe!');
+    return;
+  }
 
   let br = document.createElement('br');
   let li = document.createElement('li');
