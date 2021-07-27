@@ -50,6 +50,9 @@
   /* color: blanchedAlmond; */
 }
 
+::placeholder {
+  color: #3a89ff;
+}
 
 html {
   /* font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif; */
@@ -121,6 +124,8 @@ li {
   cursor: pointer;
   list-style-type: none;
   padding: 5px;
+
+  font-size: 14px;
 
   transition: 0.2s;
 
