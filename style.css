@@ -1,3 +1,16 @@
+button {
+  font-size: 18px;
+  margin-left: 1vw;
+
+  /* padding: 0px; */
+  padding-left: 10px;
+  border-style: none;
+
+  border-radius: 40px;
+
+  border: 1px solid black;
+}
+
 /* Thank you, */
 /* https://github.com/mrvivacious/PorNo-_public/blob/master/popup.html#L125 */
 /* Style the close button */
@@ -56,17 +69,17 @@
 
 html {
   /* font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif; */
-  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-  font-size: 14px;
-  width: 500px;
-  background-color: #FED3FF;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  width: 540px;
+  /* background-color: #fed3ff; */
   /* height: 320px; */
 }
 
 .jscolor {
   /* width: 54vw;
   height: 36px; */
-  font-size: 14px;
+  font-size: 18px;
   margin-left: 1vw;
 
   /* padding: 0px; */
@@ -76,16 +89,15 @@ html {
   border-radius: 40px;
 
   border: 1px solid black;
-
 }
 
 p {
-  font-size: 14px;
+  font-size: 18px;
   margin-left: 5vw;
 }
 
 strong {
-  font-size: 14px;
+  font-size: 18px;
   /* font-style: italic; */
   /* color: blue; */
 }
@@ -125,7 +137,7 @@ li {
   list-style-type: none;
   padding: 5px;
 
-  font-size: 14px;
+  font-size: 18px;
 
   transition: 0.2s;
 

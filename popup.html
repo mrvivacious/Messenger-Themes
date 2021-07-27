@@ -1,133 +1,115 @@
 <!--
-  Messenger Themes => Customize how Messenger looks ~
-
-  popup.html
-
-  This file is the interface for users to customize and select themes
-
   @author Linus Zhu
   @author Vivek Bhookya @mrvivacious
--->
 
-<!doctype html>
-<!--
-  This page is shown when the extension button is clicked, because the
-  "browser_action" field in manifest.json contains the "default_popup" key with
-  value "popup.html".
--->
-
-<!--
   TODO:
   o Working popup page
     o Hex color chooser
     o Save to storage.sync (https://developer.chrome.com/extensions/options)
     o Verify saved states (https://chrome.google.com/webstore/detail/storage-area-explorer/ocfjjjjhkpapocigimmppepjgfdecjkb?hl=en)
-
 -->
 
+<!doctype html>
 <html>
+  <head>
+    <title>Messenger Themes Options</title>
+    <link rel="stylesheet" href="style.css">
 
-<head>
-  <title>Messenger Themes Options</title>
+    <!-- Put the script in the header if you want to "pre-load" the script -->
+    <!-- Shout out http://jscolor.com/ big thank you for the color picker -->
+    <!-- Themes for Messenger is NON-Commercial -->
+    <!-- MIT license is compatible with GPL -->
+    <!-- https://www.gnu.org/licenses/gpl-3.0.txt -->
+    <!-- https://www.google.com/search?q=is+mit+license+compatible+with+gpl&oq=is+mit+license+com&aqs=chrome.2.69i57j0l5.3025j0j4&sourceid=chrome&ie=UTF-8 -->
+    <script src="jscolor.js"></script>
+  </head>
+  <body>
+    <center>
+      <h1>Themes for Messenger</h1>
+    </center>
 
-  <link rel="stylesheet" href="style.css">
+    <div id="container">
+      <div id="left">
+        <!-- <strong>Chat colors:</strong> -->
+        <p>Your chat bubble color
+          <br>
+          <input class="jscolor" id="ourColor" value="">
+        </p>
 
-  <!-- Put the script in the header if you want to "pre-load" the script -->
-  <!-- Shout out http://jscolor.com/ big thank you for the color picker -->
-  <!-- Themes for Messenger is NON-Commercial -->
-  <!-- MIT license is compatible with GPL -->
-  <!-- https://www.gnu.org/licenses/gpl-3.0.txt -->
-  <!-- https://www.google.com/search?q=is+mit+license+compatible+with+gpl&oq=is+mit+license+com&aqs=chrome.2.69i57j0l5.3025j0j4&sourceid=chrome&ie=UTF-8 -->
-  <script src="jscolor.js"></script>
-</head>
+        <p>Their chat bubble color
+          <br>
+          <input class="jscolor" id="theirColor" value="">
+        </p>
 
-<body>
-  <center>
-    <h1>Themes for Messenger</h1>
-  </center>
+        <p>The background color
+          <br>
+          <input class="jscolor" id="backgroundColor" value="">
+        </p>
 
-  <!-- <strong>Preset Themes</strong> -->
+        <p>
+          <br>
+          <button>Reset</button>
+        </p>
 
-  <div id="container">
+        <!-- https://github.com/mrvivacious/PorNo-_public/blob/master/popup.html#L258 -->
+        <!-- Input field for link -->
+        <!-- <strong>Save this TheMe:</strong>
+        <p>
+          <em>Name:</em>
+          <input style="color:black; background-color:#FED3FF;" type="text"
+            class="input_text" id="INPUT_name" placeholder="My cool TheMe...">
+        </p> -->
+        <!-- Save button -->
+        <!-- <button id="save">Save</button>
+        <br><br>
 
-    <div id="left">
-      <strong>Chat colors:</strong>
-      <p>Your chat bubble color
-        <br>
-        <input class="jscolor" id="ourColor" value="">
-      </p>
+        <strong>
+          * Saving a TheMe with a name already in use will overwrite the
+          existing TheMe.
+        </strong> -->
+        <!-- <br><br> -->
 
-      <p>Their chat bubble color
-        <br>
-        <input class="jscolor" id="theirColor" value="">
-      </p>
+        <!-- <div id="footer">
+          <strong>
+            <a href="https://github.com/mrvivacious/Messenger-Themes"
+              target="_blank"
+              title="Source code">Source code</a>
+          </strong>
 
-      <p>The background color
-        <br>
-        <input class="jscolor" id="backgroundColor" value="">
-      </p>
+          <br><br>
 
-      <!-- Text -->
+          <strong>
+            <a href="mailto:jvnnvt@gmail.com?Subject=TheMes" target="_blank"
+              title="Send an email?">
+              <em>Something wrong? Let me know!</em>
+            </a>
+          </strong>
+        </div> -->
+        <!-- <hr style="width:1px;size:100px;"> -->
 
-      <strong>Text colors:</strong>
+        <!-- <br> -->
+      </div>
 
-      <p>Your text color
-        <br>
-        <input class="jscolor" id="ourTextColor" value="">
-      </p>
+      <!-- <div id="middle"></div> -->
 
-      <p>Their text color
-        <br>
-        <input class="jscolor" id="theirTextColor" value="">
-      </p>
+      <div id="right">
+        <!-- Text -->
 
-      <!-- Thank you, -->
-      <!-- https://github.com/mrvivacious/PorNo-_public/blob/master/popup.html#L258 -->
-      <!-- Input field for link -->
-      <strong>Save this TheMe:</strong>
+        <!-- <strong>Text colors:</strong> -->
+        <p>Your text color
+          <br>
+          <input class="jscolor" id="ourTextColor" value="">
+        </p>
+        <p>Their text color
+          <br>
+          <input class="jscolor" id="theirTextColor" value="">
+        </p>
+      </div>
 
-      <!-- Input field for name -->
-      <p>
-        <em>Name:</em>
-        <input style="color:black; background-color:#FED3FF;" type="text" class="input_text" id="INPUT_name" placeholder="My cool TheMe...">
-      </p>
-      <!-- Save button -->
-      <button id="save">Save</button>
-      <br><br>
-
-      <strong>
-        * Saving a TheMe with a name already in use will overwrite the existing TheMe.
-      </strong>
-
-      <br><br>
-
-      <strong>
-        <a href="https://github.com/mrvivacious/Messenger-Themes" target="_blank"
-         title="Source code">Source code</a>
-      </strong>
-
-      <br><br>
-
-      <strong>
-        <a href="mailto:jvnnvt@gmail.com?Subject=TheMes" target="_blank" title="Send an email?">
-          <em>Something wrong? Let me know!</em>
-        </a>
-      </strong>
-
-      <hr style="width:1px;size:100px;">
-
-      <br>
-    </div>
-
-    <div id="middle"></div>
-
-    <div id="right">
-      <!-- THEME LIST GOES BELOW -->
+      <!-- <div id="right">
       <strong>Saved TheMes</strong>
-
       <ul id="themeList">
         <li>Dark black theme
-          <!-- <span class="delete">x</span> -->
           <br>
           <div class="swatches">
             <div class="first" style="background-color:#000"></div>
@@ -140,7 +122,6 @@
         </li>
 
         <li>High contrast
-          <!-- <span class="delete">x</span> -->
           <br>
           <div class="swatches">
             <div class="first" style="background-color:#0E2C00"></div>
@@ -153,7 +134,6 @@
         </li>
 
         <li>Linus
-          <!-- <span class="delete">x</span> -->
           <br>
           <div class="swatches">
             <div class="first" style="background-color:#13B9FF"></div>
@@ -166,7 +146,6 @@
         </li>
 
         <li>Vivek
-          <!-- <span class="delete">x</span> -->
           <br>
           <div class="swatches">
             <div class="first" style="background-color:#0084ff"></div>
@@ -179,7 +158,6 @@
         </li>
 
         <li>Default
-          <!-- <span class="delete">x</span> -->
           <br>
           <div class="swatches">
             <div class="first" style="background-color:#0099FF"></div>
@@ -190,62 +168,11 @@
           </div>
           <br>
         </li>
-        <!-- your√ their√ background√ yourFont√ theirFont -->
-
-        <!-- <div>
-          <p>
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-
-            Darcula
-          </p>
-        </div>
-
-        <div>
-          <p>
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-
-            High contrast
-            <span>colors go here swatch</span>
-          </p>
-        </div>
-
-        <div>
-          <p>
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-
-            Linus
-          </p>
-        </div>
-
-        <div>
-          <p>
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-
-            Vivek
-          </p>
-        </div> -->
       </ul>
-      <!-- Close theMe list -->
+      Close theMe list
+    </div> -->
     </div>
-  </div>
-</body>
+  </body>
 
-<!-- Scripts go outside of the body -->
-<!-- Adding a script at the bottom of an HTML file will activate the script after the
-        above HTML has loaded -->
-<!-- <script src="themes.js"></script> -->
-<script src="popup.js"></script>
-
+  <script src="popup.js"></script>
 </html>
