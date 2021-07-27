@@ -11,7 +11,8 @@ const BACKGROUND_PANEL_TOP =
   "rq0escxv l9j0dhe7 du4w35lb j83agx80 pfnyh3mw i1fnvgqd bp9cbjyn owycx6da btwxx1t3 hv4rvrfc dati1w0a f10w8fjw pybr56ya b5q2rw42 lq239pai mysgfdmx hddg9phg";
 const BACKGROUND_PANEL_LEFT =
   "hybvsw6c cjfnh4rs j83agx80 cbu4d94t dp1hu0rb l9j0dhe7 kr520xx4 o36gj0jk jyyn76af ow71b3p4 pnfry9he so2p5rfc owhy4gn4 wrtwqps9";
-const BACKGROUND_PANEL_CHAT = "gok29vw1";
+const BACKGROUND_PANEL_CHAT =
+  "buofh1pr j83agx80 eg9m0zos ni8dbmo4 cbu4d94t gok29vw1";
 const BACKGROUND_PANEL_CHAT_LOADING =
   "j83agx80 bp9cbjyn taijpn5t rgmg9uty rj1gh0hx buofh1pr pfnyh3mw pybr56ya f10w8fjw nred35xi";
 const BACKGROUND_PANEL_DIVIDER =
@@ -24,12 +25,8 @@ const BACKGROUND_PANEL_RECIPIENT_DETAIL_PAGE =
   "rq0escxv l9j0dhe7 du4w35lb j83agx80 cbu4d94t g5gj957u f4tghd1a ifue306u kuivcneq t63ysoy8";
 
 // Messages
-const ALL_MESSAGES =
-  "l60d2q6s d1544ag0 sj5x9vvc tw6a2znq l9j0dhe7 ni8dbmo4 stjgntxs qlfml3jp";
-const OUR_MESSAGES = "_43by";
-const THEIR_MESSAGES = "_3oh-";
-const REPLY_MESSAGE = "_6uum";
-const MESSAGES_WITH_REACTION = "_5z-5";
+const OUR_MESSAGES = '[data-testid="outgoing_message"]';
+const THEIR_MESSAGES = '[data-testid="messenger_incoming_text_row"]';
 
 // Misc
 // POPUP_MEDIA_PANEL: When the Messenger window is
