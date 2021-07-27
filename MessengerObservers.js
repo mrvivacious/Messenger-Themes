@@ -2,7 +2,6 @@ function initialColor() {
   recolorMessages();
   recolorBackground();
   recolorSVG();
-  
 }
 
 // When conversation changes, refresh the message observer to
@@ -11,16 +10,16 @@ function initialColor() {
 function addObserverForURLChange() {
   let oldHref = null;
 
-  window.onload = function() {
-    let bodyList = document.querySelector('body');
-    let observer = new MutationObserver(function(mutations) {
-      mutations.forEach(function(mutation) {
+  window.onload = function () {
+    let bodyList = document.querySelector("body");
+    let observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
         if (oldHref != document.location.href) {
           // URL has changed
           oldHref = document.location.href;
 
           // Add chat event listener
-          console.log('recoloring -----')
+          console.log("recoloring -----");
           addObserverForMessage();
         }
       });
@@ -28,7 +27,7 @@ function addObserverForURLChange() {
 
     let config = {
       childList: true,
-      subtree: true
+      subtree: true,
     };
 
     observer.observe(bodyList, config);
@@ -40,29 +39,29 @@ function addObserverForURLChange() {
 //  CPU and browser
 // https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/
 function addObserverForMessage() {
-  let messagesPanel = document.querySelectorAll('#js_1')[0];
+  let messagesPanel = document.querySelectorAll("#js_1")[0];
 
   if (!messagesPanel) {
     // https://stackoverflow.com/questions/40398054/observe-on-mutationobserver-parameter-1-is-not-of-type-node
     //The node we need does not exist yet.
     //Wait 500ms and try again
-    window.setTimeout(addObserverForMessage,100);
-    console.log('Waiting...');
+    window.setTimeout(addObserverForMessage, 100);
+    console.log("Waiting...");
     return;
   }
 
-  let config = {childList: true};
-  let observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
+  let config = { childList: true };
+  let observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
       // RECOLOR MESSAGES HERE
-      console.log('New message loaded: ' + mutation)
+      console.log("New message loaded: " + mutation);
       recolorMessages();
     });
   });
 
   // pass in the target node, as well as the observer options
   observer.observe(messagesPanel, config);
-  console.log('Added message observer');
+  console.log("Added message observer");
   initialColor();
 }
 

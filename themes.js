@@ -46,23 +46,23 @@
 // onMessageSendOrReceive, recolorMessages
 // etc.
 
-let OUR_COLOR = '';
-let THEIR_COLOR = '';
-let BACKGROUND_COLOR = '';
+let OUR_COLOR = "";
+let THEIR_COLOR = "";
+let BACKGROUND_COLOR = "";
 
-let OUR_TEXT_COLOR = '';
-let THEIR_TEXT_COLOR = '';
+let OUR_TEXT_COLOR = "";
+let THEIR_TEXT_COLOR = "";
 
-let META_TEXT_COLOR = '';
+let META_TEXT_COLOR = "";
 
 // window.onload = () => {// Silence fucking errors
-  getColorsFromStorage();
-  chrome.runtime.onMessage.addListener(acceptExtensionMessage);
-  setInterval(recolor, 800);
+getColorsFromStorage();
+chrome.runtime.onMessage.addListener(acceptExtensionMessage);
+setInterval(recolor, 800);
 // }
 
 function getColorsFromStorage() {
-  chrome.storage.sync.get('colors', function(colorsList) {
+  chrome.storage.sync.get("colors", function (colorsList) {
     let theMe = colorsList.colors[0];
 
     OUR_COLOR = theMe[0];
@@ -97,9 +97,9 @@ function recolorSVG() {
   // TODO replace hardcoded string ids with constants
   //  declared at the top of this file
   let svgIds = [
-    'Fill-11', // Phone
-    'original', // Video chat button
-    'Fill-17' // I for information button top right
+    "Fill-11", // Phone
+    "original", // Video chat button
+    "Fill-17", // I for information button top right
   ];
 
   // IDs
@@ -124,484 +124,484 @@ function recolorSVG() {
   }
 }
 
-function recolorBottomSVGGroupChat() {
-  // Iterate over the SVGs on the bottom panel
-  let iconContainer = document.getElementsByClassName('_5irm _7mkm')[0];
-  let bottomSVGS = document.getElementsByClassName('_7oal');
+// function recolorBottomSVGGroupChat() {
+//   // Iterate over the SVGs on the bottom panel
+//   let iconContainer = document.getElementsByClassName('_5irm _7mkm')[0];
+//   let bottomSVGS = document.getElementsByClassName('_7oal');
 
-  // The window is wide enough to show all the SVG icons to the right of the
-  //  plus icon so the popup doesn't exist
-  // Note the different icon case numbering in each conditional block
-  if (iconContainer.childElementCount === 5) {
-    for (let svg = 2; bottomSVGS[svg]; svg++) {
-      // Get the current SVG
-      let currentSVG = bottomSVGS[svg];
+//   // The window is wide enough to show all the SVG icons to the right of the
+//   //  plus icon so the popup doesn't exist
+//   // Note the different icon case numbering in each conditional block
+//   if (iconContainer.childElementCount === 5) {
+//     for (let svg = 2; bottomSVGS[svg]; svg++) {
+//       // Get the current SVG
+//       let currentSVG = bottomSVGS[svg];
 
-      if (bottomSVGS.length === 11) {
-        // Due to the -1 indexing, the file upload icon will be skipped over rip
-        // If we aren't at the file icon, proceed as normal, else jump down
-        if (svg === 10) {
-          // Color the file icon
-          currentSVG = currentSVG.children[0].children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-        }
+//       if (bottomSVGS.length === 11) {
+//         // Due to the -1 indexing, the file upload icon will be skipped over rip
+//         // If we aren't at the file icon, proceed as normal, else jump down
+//         if (svg === 10) {
+//           // Color the file icon
+//           currentSVG = currentSVG.children[0].children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//         }
 
-        // Update with respect to the different list indexing
-        currentSVG = bottomSVGS[svg - 1];
-      }
+//         // Update with respect to the different list indexing
+//         currentSVG = bottomSVGS[svg - 1];
+//       }
 
-      // Use the appropriate search:
-      // Thank you,
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
-      switch (svg) {
-        // Ignore, for these SVGs aren't icons / aren't visible
-        case 0: case 1: case 8:
-          break;
+//       // Use the appropriate search:
+//       // Thank you,
+//       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+//       switch (svg) {
+//         // Ignore, for these SVGs aren't icons / aren't visible
+//         case 0: case 1: case 8:
+//           break;
 
-        // rgba handling
-        // The plus icon on the bottom left [that toggles the other buttons]
-        case 2:
-          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
-          break;
+//         // rgba handling
+//         // The plus icon on the bottom left [that toggles the other buttons]
+//         case 2:
+//           currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+//           break;
 
-        // 1 level
-        // The like button / emoji reaction icon on the bottom right
-        case 12:
-          currentSVG = currentSVG.children[0];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 1 level
+//         // The like button / emoji reaction icon on the bottom right
+//         case 12:
+//           currentSVG = currentSVG.children[0];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // The poll
-        case 3:
-          currentSVG = currentSVG.children[0].children[0];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // The poll
+//         case 3:
+//           currentSVG = currentSVG.children[0].children[0];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 2 levels
-        // GIF selector | Sticker selector icon
-        case 9: case 10:
-          currentSVG = currentSVG.children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 2 levels
+//         // GIF selector | Sticker selector icon
+//         case 9: case 10:
+//           currentSVG = currentSVG.children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 3 levels
-        // Camera | Gamepad | Microphone | File upload icon
-        case 4: case 5: case 7: case 11:
-          currentSVG = currentSVG.children[0].children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 3 levels
+//         // Camera | Gamepad | Microphone | File upload icon
+//         case 4: case 5: case 7: case 11:
+//           currentSVG = currentSVG.children[0].children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // Special double-child SVG case lmao
-        // Currency icon
-        case 6:
-          currentSVG = currentSVG.children[0].children[0];
-          currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
-          currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
-          break;
+//         // Special double-child SVG case lmao
+//         // Currency icon
+//         case 6:
+//           currentSVG = currentSVG.children[0].children[0];
+//           currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
+//           currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
+//           break;
 
-        default:
-          console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
-      }
-    }
-  }
-  // Else if, the window must display half of the SVG icons in a popup above the chat input
-  else if (iconContainer.childElementCount === 4) {
-    for (let svg = 1; bottomSVGS[svg]; svg++) {
-      // Get the current SVG
-      let currentSVG = bottomSVGS[svg];
+//         default:
+//           console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
+//       }
+//     }
+//   }
+//   // Else if, the window must display half of the SVG icons in a popup above the chat input
+//   else if (iconContainer.childElementCount === 4) {
+//     for (let svg = 1; bottomSVGS[svg]; svg++) {
+//       // Get the current SVG
+//       let currentSVG = bottomSVGS[svg];
 
-      if (bottomSVGS.length === 11) {
-        // Due to the -1 indexing, the file upload icon will be skipped over rip
-        // If we aren't at the file icon, proceed as normal, else jump down
-        if (svg === 10) {
-          // Color the file icon
-          currentSVG = currentSVG.children[0].children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-        }
+//       if (bottomSVGS.length === 11) {
+//         // Due to the -1 indexing, the file upload icon will be skipped over rip
+//         // If we aren't at the file icon, proceed as normal, else jump down
+//         if (svg === 10) {
+//           // Color the file icon
+//           currentSVG = currentSVG.children[0].children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//         }
 
-        // Update with respect to the different list indexing
-        currentSVG = bottomSVGS[svg - 1];
-      }
+//         // Update with respect to the different list indexing
+//         currentSVG = bottomSVGS[svg - 1];
+//       }
 
-      // Use the appropriate search:
-      // Thank you,
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
-      switch (svg) {
-        // Ignore, for these SVGs aren't icons / aren't visible
-        case 0: case 1: case 8:
-          break;
+//       // Use the appropriate search:
+//       // Thank you,
+//       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+//       switch (svg) {
+//         // Ignore, for these SVGs aren't icons / aren't visible
+//         case 0: case 1: case 8:
+//           break;
 
-        // rgba handling
-        // The plus icon on the bottom left [that toggles the other buttons]
-        case 7:
-          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
-          break;
+//         // rgba handling
+//         // The plus icon on the bottom left [that toggles the other buttons]
+//         case 7:
+//           currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+//           break;
 
-        // 1 level
-        // The like button / emoji reaction icon on the bottom right
-        case 12:
-          currentSVG = currentSVG.children[0];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 1 level
+//         // The like button / emoji reaction icon on the bottom right
+//         case 12:
+//           currentSVG = currentSVG.children[0];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // The poll
-        case 6:
-          currentSVG = currentSVG.children[0].children[0];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // The poll
+//         case 6:
+//           currentSVG = currentSVG.children[0].children[0];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 2 levels
-        // GIF selector | Sticker selector icon
-        case 9: case 10:
-          currentSVG = currentSVG.children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 2 levels
+//         // GIF selector | Sticker selector icon
+//         case 9: case 10:
+//           currentSVG = currentSVG.children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 3 levels
-        // Camera | Gamepad | Microphone | File upload icon
-        case 5: case 4: case 2: case 11:
-          currentSVG = currentSVG.children[0].children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 3 levels
+//         // Camera | Gamepad | Microphone | File upload icon
+//         case 5: case 4: case 2: case 11:
+//           currentSVG = currentSVG.children[0].children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // Special double-child SVG case lmao
-        // Currency icon
-        case 3:
-          currentSVG = currentSVG.children[0].children[0];
-          currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
-          currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
-          break;
+//         // Special double-child SVG case lmao
+//         // Currency icon
+//         case 3:
+//           currentSVG = currentSVG.children[0].children[0];
+//           currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
+//           currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
+//           break;
 
-        default:
-          console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
-      }
-    }
-  }
-  // Else, the window must display all of the SVG icons in a popup above the chat input
-  else {
-    for (let svg = 1; bottomSVGS[svg]; svg++) {
-      // Get the current SVG
-      let currentSVG = bottomSVGS[svg];
+//         default:
+//           console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
+//       }
+//     }
+//   }
+//   // Else, the window must display all of the SVG icons in a popup above the chat input
+//   else {
+//     for (let svg = 1; bottomSVGS[svg]; svg++) {
+//       // Get the current SVG
+//       let currentSVG = bottomSVGS[svg];
 
-      if (bottomSVGS.length === 11) {
-        // Due to the -1 indexing, the file upload icon will be skipped over rip
-        // If we aren't at the file icon, proceed as normal, else jump down
-        if (svg === 10) {
-          // Color the plus icon
-          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
-        }
+//       if (bottomSVGS.length === 11) {
+//         // Due to the -1 indexing, the file upload icon will be skipped over rip
+//         // If we aren't at the file icon, proceed as normal, else jump down
+//         if (svg === 10) {
+//           // Color the plus icon
+//           currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+//         }
 
-        // Update with respect to the different list indexing
-        currentSVG = bottomSVGS[svg - 1];
-      }
+//         // Update with respect to the different list indexing
+//         currentSVG = bottomSVGS[svg - 1];
+//       }
 
-      // Use the appropriate search:
-      // Thank you,
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
-      switch (svg) {
-        // Ignore, for these SVGs aren't icons / aren't visible
-        case 0: case 1: case 4:
-          break;
+//       // Use the appropriate search:
+//       // Thank you,
+//       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+//       switch (svg) {
+//         // Ignore, for these SVGs aren't icons / aren't visible
+//         case 0: case 1: case 4:
+//           break;
 
-        // rgba handling
-        // The plus icon on the bottom left [that toggles the other buttons]
-        case 11:
-          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
-          break;
+//         // rgba handling
+//         // The plus icon on the bottom left [that toggles the other buttons]
+//         case 11:
+//           currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+//           break;
 
-        // 1 level
-        // The like button / emoji reaction icon on the bottom right
-        case 12:
-          currentSVG = currentSVG.children[0];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 1 level
+//         // The like button / emoji reaction icon on the bottom right
+//         case 12:
+//           currentSVG = currentSVG.children[0];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // The poll
-        case 10:
-          currentSVG = currentSVG.children[0].children[0];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // The poll
+//         case 10:
+//           currentSVG = currentSVG.children[0].children[0];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 2 levels
-        // GIF selector | Sticker selector icon
-        case 5: case 3:
-          currentSVG = currentSVG.children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 2 levels
+//         // GIF selector | Sticker selector icon
+//         case 5: case 3:
+//           currentSVG = currentSVG.children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 3 levels
-        // Camera | Gamepad | Microphone | File upload icon
-        case 9: case 8: case 6: case 2:
-          currentSVG = currentSVG.children[0].children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 3 levels
+//         // Camera | Gamepad | Microphone | File upload icon
+//         case 9: case 8: case 6: case 2:
+//           currentSVG = currentSVG.children[0].children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // Special double-child SVG case lmao
-        // Currency icon
-        case 7:
-          currentSVG = currentSVG.children[0].children[0];
-          currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
-          currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
-          break;
+//         // Special double-child SVG case lmao
+//         // Currency icon
+//         case 7:
+//           currentSVG = currentSVG.children[0].children[0];
+//           currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
+//           currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
+//           break;
 
-        default:
-          console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
-      }
-    }
-  }
-}
+//         default:
+//           console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
+//       }
+//     }
+//   }
+// }
 
-function recolorBottomSVG() {
-  // TODO IF THE PLUS BUTTON OPENS A PANEL ABOVE IT INSTEAD OF
-  //  SHOWING THE ICONS TO THE RIGHT OF IT, THIS CODE BREAKS
-  // BOTTOM PANEL SVGs
+// function recolorBottomSVG() {
+//   // TODO IF THE PLUS BUTTON OPENS A PANEL ABOVE IT INSTEAD OF
+//   //  SHOWING THE ICONS TO THE RIGHT OF IT, THIS CODE BREAKS
+//   // BOTTOM PANEL SVGs
 
-  // Iterate over the SVGs on the bottom panel
-  let iconContainer = document.getElementsByClassName('_5irm _7mkm')[0];
-  let bottomSVGS = document.getElementsByClassName('_7oal');
+//   // Iterate over the SVGs on the bottom panel
+//   let iconContainer = document.getElementsByClassName('_5irm _7mkm')[0];
+//   let bottomSVGS = document.getElementsByClassName('_7oal');
 
-  // Group chats offer a poll SVG
-  // If the SVG count on the bottom panel is 13 (default group chat),
-  //  OR if a message is being typed therefore the SVG count is 12,
-  //  OR (if the SVG count is 11 AND the last child is an emoji instead of the
-  //  thumb reaction)
-  let reactionIsImgAndNotThumb =
-    iconContainer.children[iconContainer.childElementCount - 1].children[0].src
-  if (bottomSVGS.length === 13 || bottomSVGS.length === 12 ||
-      (bottomSVGS.length === 11 && reactionIsImgAndNotThumb)) {
-    console.log('group chat !?');
-    recolorBottomSVGGroupChat();
-    return;
-  }
+//   // Group chats offer a poll SVG
+//   // If the SVG count on the bottom panel is 13 (default group chat),
+//   //  OR if a message is being typed therefore the SVG count is 12,
+//   //  OR (if the SVG count is 11 AND the last child is an emoji instead of the
+//   //  thumb reaction)
+//   let reactionIsImgAndNotThumb =
+//     iconContainer.children[iconContainer.childElementCount - 1].children[0].src
+//   if (bottomSVGS.length === 13 || bottomSVGS.length === 12 ||
+//       (bottomSVGS.length === 11 && reactionIsImgAndNotThumb)) {
+//     console.log('group chat !?');
+//     recolorBottomSVGGroupChat();
+//     return;
+//   }
 
-  // The window is wide enough to show all the SVG icons to the right of the
-  //  plus icon so the popup doesn't exist
-  // Note the different icon case numbering in each conditional block
-  if (iconContainer.childElementCount === 5) {
-    for (let svg = 1; bottomSVGS[svg]; svg++) {
-      // Get the current SVG
-      let currentSVG = bottomSVGS[svg];
+//   // The window is wide enough to show all the SVG icons to the right of the
+//   //  plus icon so the popup doesn't exist
+//   // Note the different icon case numbering in each conditional block
+//   if (iconContainer.childElementCount === 5) {
+//     for (let svg = 1; bottomSVGS[svg]; svg++) {
+//       // Get the current SVG
+//       let currentSVG = bottomSVGS[svg];
 
-      // If the user has a dynamic theme already selected,
-      //  the SVG list has a different length and the items
-      //  are numbered one less than those from the list of a static theme
-      if (bottomSVGS.length === 9) {
-        // Due to the -1 indexing, the file upload icon will be skipped over rip
-        // If we aren't at the file icon, proceed as normal, else jump down
-        if (svg === 8) {
-          // Color the file icon
-          currentSVG = currentSVG.children[0].children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-        }
+//       // If the user has a dynamic theme already selected,
+//       //  the SVG list has a different length and the items
+//       //  are numbered one less than those from the list of a static theme
+//       if (bottomSVGS.length === 9) {
+//         // Due to the -1 indexing, the file upload icon will be skipped over rip
+//         // If we aren't at the file icon, proceed as normal, else jump down
+//         if (svg === 8) {
+//           // Color the file icon
+//           currentSVG = currentSVG.children[0].children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//         }
 
-        // Update with respect to the different list indexing
-        currentSVG = bottomSVGS[svg - 1];
-      }
+//         // Update with respect to the different list indexing
+//         currentSVG = bottomSVGS[svg - 1];
+//       }
 
-      // Use the appropriate search:
-      // Thank you,
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
-      switch (svg) {
-        // Ignore, for these SVGs aren't icons / aren't visible
-        case 0: case 6:
-          break;
+//       // Use the appropriate search:
+//       // Thank you,
+//       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+//       switch (svg) {
+//         // Ignore, for these SVGs aren't icons / aren't visible
+//         case 0: case 6:
+//           break;
 
-        // rgba handling
-        // The plus icon on the bottom left [that toggles the other buttons]
-        case 1:
-          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
-          break;
+//         // rgba handling
+//         // The plus icon on the bottom left [that toggles the other buttons]
+//         case 1:
+//           currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+//           break;
 
-        // 1 level
-        // The like button / emoji reaction icon on the bottom right
-        case 10:
-          currentSVG = currentSVG.children[0];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 1 level
+//         // The like button / emoji reaction icon on the bottom right
+//         case 10:
+//           currentSVG = currentSVG.children[0];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 2 levels
-        // GIF selector | Sticker selector icon
-        case 7: case 8:
-          currentSVG = currentSVG.children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 2 levels
+//         // GIF selector | Sticker selector icon
+//         case 7: case 8:
+//           currentSVG = currentSVG.children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 3 levels
-        // Camera | Gamepad | Microphone | File upload icon
-        case 2: case 3: case 5: case 9:
-          currentSVG = currentSVG.children[0].children[0].children[1];
-          if (currentSVG) {
-            currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          }
-          break;
+//         // 3 levels
+//         // Camera | Gamepad | Microphone | File upload icon
+//         case 2: case 3: case 5: case 9:
+//           currentSVG = currentSVG.children[0].children[0].children[1];
+//           if (currentSVG) {
+//             currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           }
+//           break;
 
-        // Special double-child SVG case lmao
-        // Currency icon
-        case 4:
-          currentSVG = currentSVG.children[0].children[0];
-          currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
-          currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
-          break;
+//         // Special double-child SVG case lmao
+//         // Currency icon
+//         case 4:
+//           currentSVG = currentSVG.children[0].children[0];
+//           currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
+//           currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
+//           break;
 
-        default:
-          console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
-      }
-    }
-  }
-  // Else if, the window must display half of the SVG icons in a popup above the chat input
-  else if (iconContainer.childElementCount === 4) {
-    for (let svg = 1; bottomSVGS[svg]; svg++) {
-      // Get the current SVG
-      let currentSVG = bottomSVGS[svg];
+//         default:
+//           console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
+//       }
+//     }
+//   }
+//   // Else if, the window must display half of the SVG icons in a popup above the chat input
+//   else if (iconContainer.childElementCount === 4) {
+//     for (let svg = 1; bottomSVGS[svg]; svg++) {
+//       // Get the current SVG
+//       let currentSVG = bottomSVGS[svg];
 
-      // If the user has a dynamic theme already selected,
-      //  the SVG list has a different length and the items
-      //  are numbered one less than those from the list of a static theme
-      if (bottomSVGS.length === 9) {
-        // Due to the -1 indexing, the file upload icon will be skipped over rip
-        // If we aren't at the file icon, proceed as normal, else jump down
-        if (svg === 8) {
-          // Color the file icon
-          currentSVG = currentSVG.children[0].children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-        }
+//       // If the user has a dynamic theme already selected,
+//       //  the SVG list has a different length and the items
+//       //  are numbered one less than those from the list of a static theme
+//       if (bottomSVGS.length === 9) {
+//         // Due to the -1 indexing, the file upload icon will be skipped over rip
+//         // If we aren't at the file icon, proceed as normal, else jump down
+//         if (svg === 8) {
+//           // Color the file icon
+//           currentSVG = currentSVG.children[0].children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//         }
 
-        // Update with respect to the different list indexing
-        currentSVG = bottomSVGS[svg - 1];
-      }
+//         // Update with respect to the different list indexing
+//         currentSVG = bottomSVGS[svg - 1];
+//       }
 
-      // Use the appropriate search:
-      // Thank you,
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
-      switch (svg) {
-        // Ignore, for these SVGs aren't icons / aren't visible
-        case 0: case 6:
-          break;
+//       // Use the appropriate search:
+//       // Thank you,
+//       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+//       switch (svg) {
+//         // Ignore, for these SVGs aren't icons / aren't visible
+//         case 0: case 6:
+//           break;
 
-        // rgba handling
-        // The plus icon on the bottom left [that toggles the other buttons]
-        case 5:
-          if (currentSVG.children[0].children[1]) {
-            currentSVG.children[0].children[1].style.fill = OUR_COLOR;
-          }
-          break;
+//         // rgba handling
+//         // The plus icon on the bottom left [that toggles the other buttons]
+//         case 5:
+//           if (currentSVG.children[0].children[1]) {
+//             currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+//           }
+//           break;
 
-        // 1 level
-        // The like button / emoji reaction icon on the bottom right
-        case 10:
-          currentSVG = currentSVG.children[0];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 1 level
+//         // The like button / emoji reaction icon on the bottom right
+//         case 10:
+//           currentSVG = currentSVG.children[0];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 2 levels
-        // GIF selector | Sticker selector icon
-        case 7: case 8:
-          currentSVG = currentSVG.children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 2 levels
+//         // GIF selector | Sticker selector icon
+//         case 7: case 8:
+//           currentSVG = currentSVG.children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 3 levels
-        // Camera | Gamepad | Microphone | File upload icon
-        case 4: case 3: case 1: case 9:
-          currentSVG = currentSVG.children[0].children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 3 levels
+//         // Camera | Gamepad | Microphone | File upload icon
+//         case 4: case 3: case 1: case 9:
+//           currentSVG = currentSVG.children[0].children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // Special double-child SVG case lmao
-        // Currency icon
-        case 2:
-          currentSVG = currentSVG.children[0].children[0];
-          currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
-          currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
-          break;
+//         // Special double-child SVG case lmao
+//         // Currency icon
+//         case 2:
+//           currentSVG = currentSVG.children[0].children[0];
+//           currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
+//           currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
+//           break;
 
-        default:
-          console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
-      }
-    }
-  }
-  // Else, the window must display all of the SVG icons in a popup above the chat input
-  else {
-    for (let svg = 1; bottomSVGS[svg]; svg++) {
-      // Get the current SVG
-      let currentSVG = bottomSVGS[svg];
+//         default:
+//           console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
+//       }
+//     }
+//   }
+//   // Else, the window must display all of the SVG icons in a popup above the chat input
+//   else {
+//     for (let svg = 1; bottomSVGS[svg]; svg++) {
+//       // Get the current SVG
+//       let currentSVG = bottomSVGS[svg];
 
-      // If the user has a dynamic theme already selected,
-      //  the SVG list has a different length and the items
-      //  are numbered one less than those from the list of a static theme
-      if (bottomSVGS.length === 9) {
-        // Due to the -1 indexing, the plus icon will be skipped over rip
-        // If we aren't at the plus icon, proceed as normal, else jump down
-        if (svg === 8) {
-          // Recolor plus icon
-          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
-        }
+//       // If the user has a dynamic theme already selected,
+//       //  the SVG list has a different length and the items
+//       //  are numbered one less than those from the list of a static theme
+//       if (bottomSVGS.length === 9) {
+//         // Due to the -1 indexing, the plus icon will be skipped over rip
+//         // If we aren't at the plus icon, proceed as normal, else jump down
+//         if (svg === 8) {
+//           // Recolor plus icon
+//           currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+//         }
 
-        // Update with respect to the different list indexing
-        currentSVG = bottomSVGS[svg - 1];
-      }
+//         // Update with respect to the different list indexing
+//         currentSVG = bottomSVGS[svg - 1];
+//       }
 
-      // Use the appropriate search:
-      // Thank you,
-      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
-      switch (svg) {
-        // Ignore, for these SVGs aren't icons / aren't visible
-        case 0: case 3:
-          break;
+//       // Use the appropriate search:
+//       // Thank you,
+//       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch
+//       switch (svg) {
+//         // Ignore, for these SVGs aren't icons / aren't visible
+//         case 0: case 3:
+//           break;
 
-        // rgba handling
-        // The plus icon on the bottom left [that toggles the other buttons]
-        case 9:
-          currentSVG.children[0].children[1].style.fill = OUR_COLOR;
-          break;
+//         // rgba handling
+//         // The plus icon on the bottom left [that toggles the other buttons]
+//         case 9:
+//           currentSVG.children[0].children[1].style.fill = OUR_COLOR;
+//           break;
 
-        // 1 level
-        // The like button / emoji reaction icon on the bottom right
-        case 10:
-          currentSVG = currentSVG.children[0];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 1 level
+//         // The like button / emoji reaction icon on the bottom right
+//         case 10:
+//           currentSVG = currentSVG.children[0];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 2 levels
-        // GIF selector | Sticker selector icon
-        case 4: case 2:
-          currentSVG = currentSVG.children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 2 levels
+//         // GIF selector | Sticker selector icon
+//         case 4: case 2:
+//           currentSVG = currentSVG.children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // 3 levels
-        // Camera | Gamepad | Microphone | File upload icon
-        case 8: case 7: case 5: case 1:
-          currentSVG = currentSVG.children[0].children[0].children[1];
-          currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
-          break;
+//         // 3 levels
+//         // Camera | Gamepad | Microphone | File upload icon
+//         case 8: case 7: case 5: case 1:
+//           currentSVG = currentSVG.children[0].children[0].children[1];
+//           currentSVG.outerHTML = recoloredSVG(currentSVG.outerHTML);
+//           break;
 
-        // Special double-child SVG case lmao
-        // Currency icon
-        case 6:
-          currentSVG = currentSVG.children[0].children[0];
-          currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
-          currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
-          break;
+//         // Special double-child SVG case lmao
+//         // Currency icon
+//         case 6:
+//           currentSVG = currentSVG.children[0].children[0];
+//           currentSVG.children[1].outerHTML = recoloredSVG(currentSVG.children[1].outerHTML);
+//           currentSVG.children[2].outerHTML = recoloredSVG(currentSVG.children[2].outerHTML);
+//           break;
 
-        default:
-          console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
-      }
-    }
-  }
-}
+//         default:
+//           console.log('TheMes::DEBUG: How did we get here lol -> ' + currentSVG);
+//       }
+//     }
+//   }
+// }
 
 function recoloredSVG(originalHTML) {
   // Dynamic find and replace
   // Find the original <...Fill=...> value and replace the
   //  hex with our newColor
-  let startOfFill = originalHTML.lastIndexOf('#');
+  let startOfFill = originalHTML.lastIndexOf("#");
   if (startOfFill < 0) {
-    console.log('hidden')
+    console.log("hidden");
     return;
   }
 
-  let originalFill = '';
+  let originalFill = "";
 
   // Get old fill
   for (let i = startOfFill; i < startOfFill + 7; i++) {
@@ -616,31 +616,37 @@ function recoloredSVG(originalHTML) {
 function recolorMeta() {
   // TODO Add if conditionals to ensure existence of bullshit
   // Recolor chat title
-  let chatTitle = '_17w2 _6ybr';
+  let chatTitle = "_17w2 _6ybr";
   if (document.getElementsByClassName(chatTitle)[0]) {
-    document.getElementsByClassName(chatTitle)[0].children[0].style.color = META_TEXT_COLOR;
+    document.getElementsByClassName(chatTitle)[0].children[0].style.color =
+      META_TEXT_COLOR;
   }
 
   // Time ago
-  let timeSinceLastActive = '_2v6o';
+  let timeSinceLastActive = "_2v6o";
   if (document.getElementsByClassName(timeSinceLastActive)[0]) {
-    document.getElementsByClassName(timeSinceLastActive)[0].style.color = META_TEXT_COLOR;
+    document.getElementsByClassName(timeSinceLastActive)[0].style.color =
+      META_TEXT_COLOR;
   }
   // Type a message input text
-  let inputBoxText = '_1mf _1mj';
+  let inputBoxText = "_1mf _1mj";
   // Group chat
   if (document.getElementsByClassName(inputBoxText)[1]) {
-    document.getElementsByClassName(inputBoxText)[1].children[0].children[0].style.color = META_TEXT_COLOR;
+    document.getElementsByClassName(
+      inputBoxText
+    )[1].children[0].children[0].style.color = META_TEXT_COLOR;
   }
   // Direct msg
   else {
     if (document.getElementsByClassName(inputBoxText)[0]) {
-      document.getElementsByClassName(inputBoxText)[0].children[0].children[0].style.color = META_TEXT_COLOR;
+      document.getElementsByClassName(
+        inputBoxText
+      )[0].children[0].children[0].style.color = META_TEXT_COLOR;
     }
   }
 
   // Person replied to
-  let repliedTo = '_3058 _4k7a _3-9b direction_ltr';
+  let repliedTo = "_3058 _4k7a _3-9b direction_ltr";
   let repliedToPrompts = document.getElementsByClassName(repliedTo);
 
   for (let prompt = 0; repliedToPrompts[prompt]; prompt++) {
@@ -648,7 +654,7 @@ function recolorMeta() {
   }
 
   // Left side names
-  let namesClassName = '_1ht6 _7st9';
+  let namesClassName = "_1ht6 _7st9";
   let chatLogNames = document.getElementsByClassName(namesClassName);
 
   for (let i = 0; chatLogNames[i]; i++) {
@@ -658,14 +664,13 @@ function recolorMeta() {
     // Essentially, grab the innermost child and recolor that text
     if (name.children[0]) {
       name.children[0].style.color = META_TEXT_COLOR;
-    }
-    else {
+    } else {
       name.style.color = META_TEXT_COLOR;
     }
   }
 
   // Left side timestamps
-  let chatMeta = document.getElementsByClassName('_1qt5 _6zkd _5l-3');
+  let chatMeta = document.getElementsByClassName("_1qt5 _6zkd _5l-3");
 
   for (let i = 0; chatMeta[i]; i++) {
     // Preview of most recent message
@@ -674,8 +679,6 @@ function recolorMeta() {
     // Timestamp
     chatMeta[i].children[2].style.color = META_TEXT_COLOR;
   }
-
-
 }
 
 // Thank you,
@@ -684,15 +687,15 @@ function colorIsLight(rgb) {
   let r = rgb[0];
   let g = rgb[1];
   let b = rgb[2];
-  let sum = (.213 * r) + (.715 * g) + (.072 * b);
+  let sum = 0.213 * r + 0.715 * g + 0.072 * b;
 
   // True, color is light, use dark text
-  if (sum > (255 / 2)) {
-    return '#000000';
+  if (sum > 255 / 2) {
+    return "#000000";
   }
 
   // Color is dark, use light text
-  return '#FFFFFF';
+  return "#FFFFFF";
 }
 
 function hexToRGB(hex) {
@@ -700,15 +703,29 @@ function hexToRGB(hex) {
   // https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
   let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
 
-  return result ? [
-    parseInt(result[1], 16),
-    parseInt(result[2], 16),
-    parseInt(result[3], 16)
-  ] : null;
+  return result
+    ? [
+        parseInt(result[1], 16),
+        parseInt(result[2], 16),
+        parseInt(result[3], 16),
+      ]
+    : null;
 }
 
-function recolor(ourColor, theirColor, backgroundColor, ourTextColor, theirTextColor) {
-  if (ourColor && theirColor && backgroundColor && ourTextColor && theirTextColor) {
+function recolor(
+  ourColor,
+  theirColor,
+  backgroundColor,
+  ourTextColor,
+  theirTextColor
+) {
+  if (
+    ourColor &&
+    theirColor &&
+    backgroundColor &&
+    ourTextColor &&
+    theirTextColor
+  ) {
     OUR_COLOR = ourColor;
     THEIR_COLOR = theirColor;
     BACKGROUND_COLOR = backgroundColor;
@@ -729,5 +746,5 @@ function recolor(ourColor, theirColor, backgroundColor, ourTextColor, theirTextC
 
   recolorSVG();
 
-  recolorBottomSVG();
+  // recolorBottomSVG();
 }
