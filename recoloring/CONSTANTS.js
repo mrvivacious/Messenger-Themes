@@ -32,10 +32,11 @@ const THEIR_MESSAGES = '[data-testid="messenger_incoming_text_row"]';
 // POPUP_MEDIA_PANEL: When the Messenger window is
 //  minimized to a particular width, the Upload image / Stickers / GIF / etc
 //  menu disappears -- we keep this to recolor the panel when it is toggled open
-const TYPING_INDICATOR = "clearfix _17pz";
-const MESSAGE_STATUS_INDICATOR = "_2her";
-const POPUP_MEDIA_PANEL = "_7mkk _7t1o _7t0e";
-const PAPER_AIRPLANE = "_30yy _38lh _7kpi";
-const SMILEY_FACE = "_30yy _7odb";
+// const TYPING_INDICATOR = "clearfix _17pz";
+// const MESSAGE_STATUS_INDICATOR = "_2her";
+// const POPUP_MEDIA_PANEL = "_7mkk _7t1o _7t0e";
+// const PAPER_AIRPLANE = "_30yy _38lh _7kpi";
+// const SMILEY_FACE = "_30yy _7odb";
 
-const REPLIES = "_3egs";
+const REPLIES = "nred35xi jwdofwj8";
+const CALL_UPDATES = "nred35xi fdg1wqfs ae35evdt lt9micmv gl4o1x5y";
